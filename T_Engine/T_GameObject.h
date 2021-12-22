@@ -26,7 +26,11 @@ public:
 /// </summary>
 class T_IManager {
 public:
- 	virtual void GetManagerID() = 0;
+ 	/// <summary>
+ 	/// 获得管理器ID,游戏根据管理器ID顺序进行更新
+ 	/// </summary>
+	/// <return>返回唯一管理器ID</return>
+ 	virtual int GetManagerID() = 0;
 	virtual void Update() = 0;
 	virtual void UpdateLate() = 0;
 	virtual void FixedUpdate() = 0;
@@ -39,10 +43,12 @@ public:
 class T_Scene {
 public:
 	virtual void LoadScene() = 0;
-	unordered_map<int, unique_ptr<T_IManager> > ManagerMap;
+	map<int, unique_ptr<T_IManager> > ManagerMap;
+	unique_ptr<T_IManager> gameObjectManager;
+	unique_ptr<T_IManager> renderManager;
 };
 /// <summary>
-/// 游戏实体管理器，管理器ID:42
+/// 游戏实体管理器，管理器ID无效
 /// </summary>
 class T_GameObjectManager:
 	public T_IManager
