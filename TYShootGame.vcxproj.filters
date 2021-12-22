@@ -60,6 +60,9 @@
     <ClInclude Include="T_Component.h">
       <Filter>头文件\T_Engine</Filter>
     </ClInclude>
+    <ClInclude Include="T_3dEngine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TYShootGame.cpp">
@@ -88,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="T_Component.cpp">
       <Filter>源文件\T_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="T_3dEngine.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

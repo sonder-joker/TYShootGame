@@ -21,8 +21,8 @@ T_Engine::T_Engine(HINSTANCE hInstance, LPCTSTR szWindowClass, LPCTSTR szTitle,
 {
 	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 	Gdiplus::GdiplusStartup(&ptrGdiplusToken, &gdiplusStartupInput, NULL);
-
-	quickRender = false;
+	// ĞŞ¸Ä¿ìËÙäÖÈ¾
+	quickRender = TRUE;
 
 	pEngine = this;
 	m_hInstance = hInstance;

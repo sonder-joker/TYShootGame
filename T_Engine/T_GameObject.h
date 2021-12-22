@@ -2,7 +2,15 @@
 #include "T_Config.h"
 #include "T_Vector3.h"
 #include "T_Graph.h"
+/*
+* 
+* 采用ECS架构的三维组件
+* 
+*/
 
+/// <summary>
+/// 游戏实体
+/// </summary>
 class T_GameObject{
 public:
 	T_GameObject();
@@ -13,13 +21,37 @@ public:
 	bool isActive = true;
 
 };
-
-static class T_GameObjectManager {
+/// <summary>
+/// 管理器接口
+/// </summary>
+class T_IManager {
 public:
-	static vector<unique_ptr<T_GameObject>> gameObjectArray;
-	static unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);
-	static void ClearGameObject();
-	static unique_ptr<T_GameObject>& FindGameObject(string name);
+ 	virtual void GetManagerID() = 0;
+	virtual void Update() = 0;
+	virtual void UpdateLate() = 0;
+	virtual void FixedUpdate() = 0;
+	virtual void KeyAction(int ActionType) = 0;
+	virtual void MouseAction(int x, int y, int ActionType) = 0;
+};
+/// <summary>
+/// 场景基类
+/// </summary>
+class T_Scene {
+public:
+	virtual void LoadScene() = 0;
+	unordered_map<int, unique_ptr<T_IManager> > ManagerMap;
+};
+/// <summary>
+/// 游戏实体管理器，管理器ID:42
+/// </summary>
+class T_GameObjectManager:
+	public T_IManager
+{
+public:
+	vector<unique_ptr<T_GameObject>> gameObjectArray;
+	unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);
+	void ClearGameObject();
+	unique_ptr<T_GameObject>& FindGameObject(string name);
 
 };
 
@@ -50,7 +82,9 @@ public:
 	/// <param name="gameObject">被挂载的游戏物体</param>
 	void JoinTo(unique_ptr<T_GameObject> gameObject);
 };
-
+/// <summary>
+/// 转换
+/// </summary>
 class T_Transform {
 public:
 	T_Vector3 position;

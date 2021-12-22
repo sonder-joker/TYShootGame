@@ -11,6 +11,7 @@
 #ifndef TCONFIG_H
 #define TCONFIG_H
 
+#include <unordered_map>
 #include <windows.h>
 #include <time.h>
 #include <sstream>

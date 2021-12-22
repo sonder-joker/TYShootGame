@@ -143,6 +143,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TYShootGame.h" />
+    <ClInclude Include="T_3dEngine.h" />
     <ClInclude Include="T_Component.h" />
     <ClInclude Include="T_Engine\T_Config.h" />
     <ClInclude Include="T_Engine\T_Display.h" />
@@ -155,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TYShootGame.cpp" />
+    <ClCompile Include="T_3dEngine.cpp" />
     <ClCompile Include="T_Component.cpp" />
     <ClCompile Include="T_Engine\T_Display.cpp" />
     <ClCompile Include="T_Engine\T_Engine.cpp" />
