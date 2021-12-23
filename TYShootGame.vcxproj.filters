@@ -24,9 +24,6 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TYShootGame.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="T_Engine\T_GameObject.h">
       <Filter>头文件\T_Engine</Filter>
     </ClInclude>
@@ -63,6 +60,18 @@
     <ClInclude Include="T_3dEngine.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="T_Render.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TYShootGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TYShootGame.cpp">
@@ -93,6 +102,15 @@
       <Filter>源文件\T_Engine</Filter>
     </ClCompile>
     <ClCompile Include="T_3dEngine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="T_Render.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
