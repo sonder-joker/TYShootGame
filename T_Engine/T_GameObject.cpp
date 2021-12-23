@@ -1,5 +1,9 @@
 #include "T_GameObject.h"
-
+#include "../T_Render.h"
+T_GameObjectManager::T_GameObjectManager()
+{
+	//TODO ≥ı ºªØ
+}
 unique_ptr<T_GameObject>& T_GameObjectManager::AddGameObject(unique_ptr<T_GameObject> gameObject)
 {
 	gameObjectArray.push_back(gameObject);
@@ -163,4 +167,10 @@ void T_Component::OnDestroy()
 
 void T_Component::JoinTo(unique_ptr<T_GameObject> gameObject)
 {
+}
+
+T_Scene::T_Scene()
+{
+	gameObjectManager = make_unique<T_GameObjectManager>();
+	renderManager = make_unique<T_Render>();
 }

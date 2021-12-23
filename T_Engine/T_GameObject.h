@@ -45,6 +45,7 @@ public:
 /// </summary>
 class T_Scene {
 public:
+	T_Scene();
 	static unique_ptr<T_Scene> activeScene;
 	virtual void LoadScene() = 0;
 	map<int, unique_ptr<T_IManager> > ManagerMap;
@@ -58,6 +59,7 @@ class T_GameObjectManager:
 	public T_IManager
 {
 public:
+	T_GameObjectManager();
 	vector<unique_ptr<T_GameObject>> gameObjectArray;
 	unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);
 	void ClearGameObject();
