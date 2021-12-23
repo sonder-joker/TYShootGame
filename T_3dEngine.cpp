@@ -7,6 +7,7 @@ void T_3dEngine::GameInit()
 
 void T_3dEngine::GameLogic()
 {
+	scene->gameObjectManager->FixedUpdate();
 	for (auto& managerItor : scene->ManagerMap) {
 		auto& manager = managerItor.second;
 		manager->FixedUpdate();
@@ -15,18 +16,39 @@ void T_3dEngine::GameLogic()
 
 void T_3dEngine::GamePaint(HDC hdc)
 {
-	for()
+	scene->gameObjectManager->Update();
+	for (auto& managerItor : scene->ManagerMap) {
+		auto& manager = managerItor.second;
+		manager->Update();
+	}
+	//TODO RenderUpdate
+	scene->gameObjectManager->UpdateLate();
+	for (auto& managerItor : scene->ManagerMap) {
+		auto& manager = managerItor.second;
+		manager->UpdateLate();
+	}
 }
 
 void T_3dEngine::GameEnd()
 {
+	//Ëæ±ã°É
 }
 
 void T_3dEngine::GameKeyAction(int ActionType)
 {
+	scene->gameObjectManager->KeyAction(ActionType);
+	for (auto& managerItor : scene->ManagerMap) {
+		auto& manager = managerItor.second;
+		manager->KeyAction(ActionType);
+	}
 }
 
 void T_3dEngine::GameMouseAction(int x, int y, int ActionType)
 {
+	scene->gameObjectManager->MouseAction(x,y,ActionType);
+	for (auto& managerItor : scene->ManagerMap) {
+		auto& manager = managerItor.second;
+		manager->MouseAction(x,y,ActionType);
+	}
 }
 
