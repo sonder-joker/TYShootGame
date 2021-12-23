@@ -6,8 +6,139 @@ unique_ptr<T_GameObject>& T_GameObjectManager::AddGameObject(unique_ptr<T_GameOb
 	return gameObject;
 }
 
+void T_GameObjectManager::ClearGameObject()
+{
+	auto pSlow = gameObjectArray.begin();
+	auto pFast = gameObjectArray.begin();
+	while (pFast != gameObjectArray.end()) {
+		bool slowIsDestroy = pSlow->get()->isDestroy;
+		bool fastIsDestroy = pFast->get()->isDestroy;
+		if (slowIsDestroy && fastIsDestroy) {
+			++pFast;
+		}
+		else if (slowIsDestroy) {
+			swap(pSlow, pFast);
+			++pSlow; ++pFast;
+		}
+		else if (pSlow == pFast) {
+			++pSlow; ++pFast;
+		}
+		else {
+			++pSlow;
+		}
+	}
+	gameObjectArray.erase(pSlow, gameObjectArray.end());
+	gameObjectClearFlag = false;
+}
+
+void T_GameObjectManager::Destroy(unique_ptr<T_GameObject>& gameObject)
+{
+	gameObject->isDestroy = true;
+	gameObject->isActive = false;
+	gameObjectClearFlag = true;
+	for (auto& componentItor : gameObject->componentArray) {
+		componentItor->OnDestroy();
+	}
+}
+
+void T_GameObjectManager::Update()
+{
+	if (gameObjectClearFlag) {
+		ClearGameObject();
+	}
+	for (auto& gameObjectItor : gameObjectArray) {
+		if (gameObjectItor->isActive) {
+			for (auto& componentItor : gameObjectItor->componentArray) {
+				componentItor->Update();
+			}
+		}
+	}
+}
+
+void T_GameObjectManager::UpdateLate()
+{
+	if (gameObjectClearFlag) {
+		ClearGameObject();
+	}
+	for (auto& gameObjectItor : gameObjectArray) {
+		if (gameObjectItor->isActive) {
+			for (auto& componentItor : gameObjectItor->componentArray) {
+				componentItor->UpdateLate();
+			}
+		}
+	}
+}
+
+void T_GameObjectManager::FixedUpdate()
+{
+	if (gameObjectClearFlag) {
+		ClearGameObject();
+	}
+	for (auto& gameObjectItor : gameObjectArray) {
+		if (gameObjectItor->isActive) {
+			for (auto& componentItor : gameObjectItor->componentArray) {
+				componentItor->FixedUpdate();
+			}
+		}
+	}
+}
+
+void T_GameObjectManager::KeyAction(int ActionType)
+{
+	if (gameObjectClearFlag) {
+		ClearGameObject();
+	}
+	for (auto& gameObjectItor : gameObjectArray) {
+		if (gameObjectItor->isActive) {
+			for (auto& componentItor : gameObjectItor->componentArray) {
+				componentItor->KeyAction(ActionType);
+			}
+		}
+	}
+}
+
+void T_GameObjectManager::MouseAction(int x, int y, int t)
+{
+	if (gameObjectClearFlag) {
+		ClearGameObject();
+	}
+	for (auto& gameObjectItor : gameObjectArray) {
+		if (gameObjectItor->isActive) {
+			for (auto& componentItor : gameObjectItor->componentArray) {
+				componentItor->MouseAction(x,y,t);
+			}
+		}
+	}
+}
+
 T_GameObject::T_GameObject()
 {
+	
+}
+
+void T_GameObject::ClearComponent()
+{
+	auto pSlow = componentArray.begin();
+	auto pFast = componentArray.begin();
+	while (pFast != componentArray.end()) {
+		bool slowIsDestroy = pSlow->get()->isDestroy;
+		bool fastIsDestroy = pFast->get()->isDestroy;
+		if (slowIsDestroy && fastIsDestroy) {
+			++pFast;
+		}
+		else if (slowIsDestroy) {
+			swap(pSlow, pFast);
+			++pSlow; ++pFast;
+		}
+		else if(pSlow==pFast){
+			++pSlow; ++pFast;
+		}
+		else {
+			++pSlow;
+		}
+	}
+	componentArray.erase(pSlow, componentArray.end());
+	componentClearFlag = false;
 }
 
 void T_Component::Start()

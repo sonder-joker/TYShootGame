@@ -6,6 +6,8 @@
 * 
 * 采用ECS架构的三维组件
 * 
+* TsukuYomi
+* 
 */
 
 /// <summary>
@@ -17,9 +19,10 @@ public:
 	string name;
 	T_Transform transform;
 	vector<unique_ptr<T_Component>> componentArray;
+	void ClearComponent();
 	bool isDestroy = false;
 	bool isActive = true;
-
+	bool componentClearFlag=false;
 };
 /// <summary>
 /// 管理器接口
@@ -42,9 +45,10 @@ public:
 /// </summary>
 class T_Scene {
 public:
+	static unique_ptr<T_Scene> activeScene;
 	virtual void LoadScene() = 0;
 	map<int, unique_ptr<T_IManager> > ManagerMap;
-	unique_ptr<T_IManager> gameObjectManager;
+	unique_ptr<T_GameObjectManager> gameObjectManager;
 	unique_ptr<T_IManager> renderManager;
 };
 /// <summary>
@@ -57,8 +61,13 @@ public:
 	vector<unique_ptr<T_GameObject>> gameObjectArray;
 	unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);
 	void ClearGameObject();
-	unique_ptr<T_GameObject>& FindGameObject(string name);
-
+	bool gameObjectClearFlag = false;
+	void Destroy(unique_ptr<T_GameObject>& gameObject);
+	void Update() override;
+	void UpdateLate() override;
+	void FixedUpdate() override;
+	void KeyAction(int) override;
+	void MouseAction(int, int, int) override;
 };
 
 class T_Component
@@ -83,10 +92,24 @@ public:
 	/// </summary>
 	virtual void OnDestroy();
 	/// <summary>
+	/// 对键盘操作响应
+	/// </summary>
+	/// <param name="ActionType">键盘操作类型</param>
+	virtual void KeyAction(int ActionType);
+	/// <summary>
+	/// 对鼠标操作响应
+	/// </summary>
+	/// <param name="x">鼠标指针x轴坐标</param>
+	/// <param name="y">鼠标指针y轴坐标</param>
+	/// <param name="MouseAction">鼠标操作类型</param>
+	virtual void MouseAction(int x, int y, int MouseAction);
+	/// <summary>
 	/// 将该组件挂载到游戏物体上
 	/// </summary>
 	/// <param name="gameObject">被挂载的游戏物体</param>
 	void JoinTo(unique_ptr<T_GameObject> gameObject);
+	bool isDestroy = false;
+	bool isActive = true;
 };
 /// <summary>
 /// 转换
