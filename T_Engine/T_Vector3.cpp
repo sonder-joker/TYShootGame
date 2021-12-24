@@ -143,7 +143,7 @@ T_Vector3 T_Matrix3::operator*(T_Vector3& v)
 	T_Vector3 ret;
 	for (int i = 0; i < 3; ++i) {
 		for (int r = 0; r < 3; ++r) {
-			ret[i] += v[i] * (*this)[r][i];
+			ret[i] += v[i] * (*this)[i][r];
 		}
 	}
 	return ret;

@@ -10,8 +10,6 @@ public:
 	T_Vector3(float x1, float y1, float z1) { x = x1, y = y1, z = z1; };
 	T_Vector3(const T_Vector3& v);
 
-
-
 	T_Vector3 operator =(const T_Vector3& v); //赋值运算符重载
 
 	// +-*/不同的重载方式
