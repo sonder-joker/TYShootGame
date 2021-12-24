@@ -80,15 +80,7 @@ T_Vector3 T_Vector3::operator*(T_Matrix3& m)
 
 float& T_Vector3::operator[](int t)
 {
-	switch (t)
-	{
-	case 0:
-	case 1:
-	case 2:
-		return val[t];
-	default:
-		throw new std::out_of_range("试图在三维向量中取到更高维（或者更低维)");
-	}
+	return val[t];
 }
 
 float T_Vector3::dot(const T_Vector3& v1, const T_Vector3& v2)
@@ -123,18 +115,23 @@ T_Matrix3::T_Matrix3()
 {
 }
 
+T_Matrix3::T_Matrix3(float v11, float v12, float v13, float v21, float v22, float v23, float v31, float v32, float v33)
+{
+	val[0] = v11;
+	val[1] = v12;
+	val[2] = v13;
+	val[3] = v21;
+	val[4] = v22;
+	val[5] = v23;
+	val[6] = v31;
+	val[7] = v32;
+	val[8] = v33;
+}
+
 
 float* T_Matrix3::operator[](int t)
 {
-	switch (t)
-	{
-	case 0:
-	case 1:
-	case 2:
-		return val + (t * 3);
-	default:
-		throw new std::out_of_range("试图在三相矩阵中取到更高相（或者更低相)");
-	}
+	return val + (t * 3);
 }
 
 T_Matrix3 T_Matrix3::operator*(T_Matrix3& m)

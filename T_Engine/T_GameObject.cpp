@@ -174,3 +174,77 @@ T_Scene::T_Scene()
 	gameObjectManager = make_unique<T_GameObjectManager>();
 	renderManager = make_unique<T_Render>();
 }
+
+T_Transform::T_Transform()
+{
+
+}
+
+T_Transform::T_Transform(const T_Vector3& pos, const T_Vector3& rot)
+{
+	position = pos;
+	rotation = rot;
+}
+
+T_Transform T_Transform::WorldToLocalTransform(const T_Transform& transform)
+{
+	//假设将主变换对齐世界坐标系，同时复制主变换的操作到希望变换中
+	T_Transform ret = T_Transform(transform.position, transform.rotation);
+	//将主变换移动到世界坐标系原点
+	ret.position = ret.position - position;
+	//这里也许可以优化
+	float sinx = sinf(-rotation.x), cosx = cosf(-rotation.x);
+	float siny = sinf(-rotation.y), cosy = cosf(-rotation.y);
+	float sinz = sinf(-rotation.z), cosz = cosf(-rotation.z);
+	//获得主变换相对于世界坐标系的旋转矩阵
+	T_Matrix3 xRotMatrix = T_Matrix3(
+		1, 0, 0,
+		0, cosx, -sinx,
+		0, sinx, cosx
+	);
+	T_Matrix3 yRotMatrix = T_Matrix3(
+		cosy, 0, siny,
+		0, 1, 0,
+		-siny, 0, cosy
+	);
+	T_Matrix3 zRotMatrix = T_Matrix3(
+		cosz, -sinz, 0,
+		sinz, cosz, 0,
+		0, 0, 1
+	);
+	//变换与主变换一起旋转时的坐标相对变换
+	ret.position = xRotMatrix * ret.position;
+	ret.position = yRotMatrix * ret.position;
+	ret.position = zRotMatrix * ret.position;
+	//变换与主变换一起旋转时的角度相对变换
+	ret.rotation = ret.rotation - rotation;
+	return ret;
+}
+
+T_Transform T_Transform::LocalToWorldTransform(const T_Transform& transform)
+{
+	T_Transform ret = T_Transform(transform.position, transform.rotation);
+	float sinx = sinf(rotation.x), cosx = cosf(rotation.x);
+	float siny = sinf(rotation.y), cosy = cosf(rotation.y);
+	float sinz = sinf(rotation.z), cosz = cosf(rotation.z);
+	T_Matrix3 xRotMatrix = T_Matrix3(
+		1, 0, 0,
+		0, cosx, -sinx,
+		0, sinx, cosx
+	);
+	T_Matrix3 yRotMatrix = T_Matrix3(
+		cosy, 0, siny,
+		0, 1, 0,
+		-siny, 0, cosy
+	);
+	T_Matrix3 zRotMatrix = T_Matrix3(
+		cosz, -sinz, 0,
+		sinz, cosz, 0,
+		0, 0, 1
+	);
+	ret.position = xRotMatrix * ret.position;
+	ret.position = yRotMatrix * ret.position;
+	ret.position = zRotMatrix * ret.position;
+	ret.position = ret.position + position;
+	ret.rotation = ret.rotation + rotation;
+}

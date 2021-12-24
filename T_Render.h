@@ -6,7 +6,6 @@ class T_Render :
 public:
     unique_ptr<Camera> camera;
     void RenderUpdate(HDC hdc);
-private:
     
 };
 
@@ -46,7 +45,6 @@ public:
     /// 一单位距离转化为多少屏幕像素的比率
     /// </summary>
     float screenRate;
-    //TODO 编写相机参数问题
-
+    //TODO 编写相机参数矩阵
     
 };

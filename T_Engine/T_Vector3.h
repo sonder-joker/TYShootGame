@@ -49,7 +49,12 @@ public:
 	float val[9] = { 0,0,0,0,0,0,0,0,0 };
 
 	T_Matrix3();
-	
+	T_Matrix3(
+		float v11, float v12, float v13,
+		float v21, float v22, float v23,
+		float v31, float v32, float v33
+	);
+
 	float* operator[](int t);
 	T_Matrix3 operator*(T_Matrix3& m);
 	T_Vector3 operator*(T_Vector3& v);
