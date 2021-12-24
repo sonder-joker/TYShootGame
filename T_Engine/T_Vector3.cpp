@@ -67,6 +67,17 @@ T_Vector3 T_Vector3::operator/(float a)
 		return T_Vector3(x / a, y / a, z / a);
 }
 
+T_Vector3 T_Vector3::operator*(T_Matrix3& m)
+{
+	T_Vector3 ret;
+	for (int i = 0; i < 3; ++i) {
+		for (int r = 0; r < 3; ++r) {
+			ret[i] += (*this)[i] * m[r][i];
+		}
+	}
+	return ret;
+}
+
 float& T_Vector3::operator[](int t)
 {
 	switch (t)
@@ -110,7 +121,6 @@ T_Vector3 T_Vector3::Scale(float n)
 
 T_Matrix3::T_Matrix3()
 {
-	
 }
 
 

@@ -3,6 +3,8 @@
 #include <exception>
 #include <stdexcept>
 
+
+
 class T_Vector3
 {
 public:
@@ -22,6 +24,8 @@ public:
 	T_Vector3 operator -(float a);
 	T_Vector3 operator *(float a);
 	T_Vector3 operator /(float a);
+
+	T_Vector3 operator *(T_Matrix3& m);
 
 	float& operator[](int t);
 
