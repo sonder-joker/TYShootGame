@@ -5,8 +5,9 @@ class T_Render :
 {
 public:
     unique_ptr<Camera> camera;
-
     void RenderUpdate(HDC hdc);
+private:
+    
 };
 
 class Image :
