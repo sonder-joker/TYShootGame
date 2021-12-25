@@ -1,6 +1,6 @@
 #pragma once
-#include "T_Engine/T_Engine.h"
-#include "T_Engine/T_GameObject.h"
+#include "T_Engine.h"
+#include "T_GameObject.h"
 class T_3dEngine :
     public T_Engine
 {

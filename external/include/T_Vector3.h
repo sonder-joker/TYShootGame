@@ -1,9 +1,8 @@
 #pragma once
+
 #include <math.h>
 #include <exception>
 #include <stdexcept>
-
-
 
 class T_Vector3
 {
