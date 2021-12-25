@@ -118,7 +118,21 @@ public:
 /// </summary>
 class T_Transform {
 public:
+	T_Transform();
+	T_Transform(const T_Vector3& pos, const T_Vector3& rot);
 	T_Vector3 position;
 	T_Vector3 rotation;
+	/// <summary>
+	/// 将父坐标系为世界的transform转换为父坐标系为自身的transform（相对位置与旋转不变）
+	/// </summary>
+	/// <param name="transform">要做转换的transform</param>
+	/// <returns>转换结果</returns>
+	T_Transform WorldToLocalTransform(const T_Transform& transform);
+	/// <summary>
+	/// 将父坐标系为自身的transform转换为父坐标系为世界的transform（相对位置与旋转不变）
+	/// </summary>
+	/// <param name="transform">要做转换的transform</param>
+	/// <returns>转换结果</returns>
+	T_Transform LocalToWorldTransform(const T_Transform& transform);
 };
 

@@ -2,4 +2,5 @@
 
 void T_Render::RenderUpdate(HDC hdc)
 {
+
 }
