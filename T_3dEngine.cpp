@@ -34,12 +34,12 @@ void T_3dEngine::GameEnd()
 	//Ëæ±ã°É
 }
 
-void T_3dEngine::GameKeyAction(int ActionType)
+void T_3dEngine::GameKeyAction(int KeyType,int ActionType)
 {
-	scene->gameObjectManager->KeyAction(ActionType);
+	scene->gameObjectManager->KeyAction(KeyType, ActionType);
 	for (auto& managerItor : scene->ManagerMap) {
 		auto& manager = managerItor.second;
-		manager->KeyAction(ActionType);
+		manager->KeyAction(KeyType, ActionType);
 	}
 }
 

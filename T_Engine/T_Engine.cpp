@@ -203,6 +203,9 @@ LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 	case WM_LBUTTONDOWN: //鼠标左键按下的处理
 		GameMouseAction(LOWORD(lParam), HIWORD(lParam), MOUSE_LCLICK);
 		return 0;
+	case WM_RBUTTONDOWN:
+		GameMouseAction(LOWORD(lParam), HIWORD(lParam), MOUSE_RCLICK);
+		return 0;
 	case WM_MOUSEMOVE: //鼠标移动处理
 		GameMouseAction(LOWORD(lParam), HIWORD(lParam), MOUSE_MOVE);
 		return 0;
@@ -211,14 +214,14 @@ LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		// 记录对应的按键状态
 		keys[wParam] = true;
 		// 执行游戏按键行为
-		GameKeyAction(KEY_DOWN);
+		GameKeyAction(wParam,KEY_DOWN);
 		// 附加按键行为处理
 		SubKeyAction(wParam);
 
 		return 0;
 	case WM_KEYUP:  //释放按键处理
 		keys[wParam] = false;
-		GameKeyAction(KEY_UP);
+		GameKeyAction(wParam,KEY_UP);
 		return 0;
 	case WM_NCLBUTTONDBLCLK:  //禁止双击窗口标题栏最大化窗口 
 		if(HTCAPTION==wParam)   

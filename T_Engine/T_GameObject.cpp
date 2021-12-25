@@ -87,7 +87,7 @@ void T_GameObjectManager::FixedUpdate()
 	}
 }
 
-void T_GameObjectManager::KeyAction(int ActionType)
+void T_GameObjectManager::KeyAction(int KeyType, int ActionType)
 {
 	if (gameObjectClearFlag) {
 		ClearGameObject();
@@ -95,7 +95,7 @@ void T_GameObjectManager::KeyAction(int ActionType)
 	for (auto& gameObjectItor : gameObjectArray) {
 		if (gameObjectItor->isActive) {
 			for (auto& componentItor : gameObjectItor->componentArray) {
-				componentItor->KeyAction(ActionType);
+				componentItor->KeyAction(KeyType, ActionType);
 			}
 		}
 	}

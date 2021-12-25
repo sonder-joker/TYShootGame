@@ -37,7 +37,7 @@ public:
 	virtual void Update() = 0;
 	virtual void UpdateLate() = 0;
 	virtual void FixedUpdate() = 0;
-	virtual void KeyAction(int ActionType) = 0;
+	virtual void KeyAction(int KeyType, int ActionType) = 0;
 	virtual void MouseAction(int x, int y, int ActionType) = 0;
 };
 /// <summary>
@@ -68,7 +68,7 @@ public:
 	void Update() override;
 	void UpdateLate() override;
 	void FixedUpdate() override;
-	void KeyAction(int) override;
+	void KeyAction(int,int) override;
 	void MouseAction(int, int, int) override;
 };
 
@@ -97,7 +97,7 @@ public:
 	/// 对键盘操作响应
 	/// </summary>
 	/// <param name="ActionType">键盘操作类型</param>
-	virtual void KeyAction(int ActionType);
+	virtual void KeyAction(int KeyType, int ActionType);
 	/// <summary>
 	/// 对鼠标操作响应
 	/// </summary>

@@ -99,7 +99,7 @@ public:
 	// 根据GAME_STATE值显示游戏界面
 	virtual void GamePaint(HDC hdc)=0;
 	// 根据KM_ACTION值处理按键行为
-	virtual void GameKeyAction(int ActionType=KEY_SYS_NONE)=0;
+	virtual void GameKeyAction(int KeyType,int ActionType=KEY_SYS_NONE)=0;
 	// 根据KM_ACTION值处理鼠标行为
 	virtual void GameMouseAction(int x, int y, int ActionType)=0;	
 };

@@ -72,6 +72,9 @@
     <ClInclude Include="MainScene.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TYShootGame.cpp">
@@ -111,6 +114,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,7 +10,7 @@ public:
     void GameLogic() override;
     void GamePaint(HDC hdc) override;
     void GameEnd() override;
-    void GameKeyAction(int ActionType) override;
+    void GameKeyAction(int KeyType,int ActionType) override;
     void GameMouseAction(int x, int y, int ActionType) override;
 };
 
