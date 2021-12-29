@@ -10,20 +10,9 @@
 * 
 */
 
-/// <summary>
-/// 游戏实体
-/// </summary>
-class T_GameObject{
-public:
-	T_GameObject();
-	string name;
-	T_Transform transform;
-	vector<unique_ptr<T_Component>> componentArray;
-	void ClearComponent();
-	bool isDestroy = false;
-	bool isActive = true;
-	bool componentClearFlag=false;
-};
+class T_GameObject;
+class T_GameObjectManager;
+
 /// <summary>
 /// 管理器接口
 /// </summary>
@@ -52,25 +41,7 @@ public:
 	unique_ptr<T_GameObjectManager> gameObjectManager;
 	unique_ptr<T_IManager> renderManager;
 };
-/// <summary>
-/// 游戏实体管理器，管理器ID无效
-/// </summary>
-class T_GameObjectManager:
-	public T_IManager
-{
-public:
-	T_GameObjectManager();
-	vector<unique_ptr<T_GameObject>> gameObjectArray;
-	unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);
-	void ClearGameObject();
-	bool gameObjectClearFlag = false;
-	void Destroy(unique_ptr<T_GameObject>& gameObject);
-	void Update() override;
-	void UpdateLate() override;
-	void FixedUpdate() override;
-	void KeyAction(int,int) override;
-	void MouseAction(int, int, int) override;
-};
+
 
 class T_Component
 {
@@ -136,3 +107,38 @@ public:
 	T_Transform LocalToWorldTransform(const T_Transform& transform);
 };
 
+/// <summary>
+/// 游戏实体
+/// </summary>
+class T_GameObject{
+public:
+    T_GameObject();
+    string name;
+    T_Transform transform;
+    vector<unique_ptr<T_Component>> componentArray;
+    void ClearComponent();
+    bool isDestroy = false;
+    bool isActive = true;
+    bool componentClearFlag=false;
+};
+
+/// <summary>
+/// 游戏实体管理器，管理器ID无效
+/// </summary>
+class T_GameObjectManager:
+        public T_IManager
+{
+public:
+    T_GameObjectManager();
+    vector<unique_ptr<T_GameObject>> gameObjectArray;
+    unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);
+    void ClearGameObject();
+    bool gameObjectClearFlag = false;
+    void Destroy(unique_ptr<T_GameObject>& gameObject);
+    void Update() override;
+    void UpdateLate() override;
+    void FixedUpdate() override;
+    void KeyAction(int,int) override;
+    void MouseAction(int, int, int) override;
+
+};

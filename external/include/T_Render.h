@@ -1,26 +1,13 @@
 #pragma once
-#include "T_Engine/T_GameObject.h"
-class T_Render :
-    public T_IManager
-{
-public:
-    unique_ptr<Camera> camera;
-    void RenderUpdate(HDC hdc);
-    
-};
+#include "T_GameObject.h"
+#include "T_Engine.h"
 
-class Image :
-    public T_Component
-{
-    unique_ptr<T_Graph> image;
-
-};
 /// <summary>
 /// 小孔成像原理的透视相机组件
 /// </summary>
 /// 近屏幕：显示屏幕
 class Camera :
-    public T_Component 
+        public T_Component
 {
 public:
     //以下为摄像机内参
@@ -46,5 +33,22 @@ public:
     /// </summary>
     float screenRate;
     //TODO 编写相机参数矩阵
-    
+
 };
+
+class T_Render :
+    public T_IManager
+{
+public:
+    unique_ptr<Camera> camera;
+    void RenderUpdate(HDC hdc);
+
+};
+
+class Image :
+    public T_Component
+{
+    unique_ptr<T_Graph> image;
+
+};
+

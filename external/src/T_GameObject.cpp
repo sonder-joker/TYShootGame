@@ -1,5 +1,5 @@
 #include "T_GameObject.h"
-#include "../T_Render.h"
+#include "T_Render.h"
 T_GameObjectManager::T_GameObjectManager()
 {
 	//TODO ≥ı ºªØ
