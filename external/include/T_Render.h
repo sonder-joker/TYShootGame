@@ -3,52 +3,43 @@
 #include "T_Engine.h"
 
 /// <summary>
-/// 小孔成像原理的透视相机组件
+/// 鱼眼透视相机
 /// </summary>
-/// 近屏幕：显示屏幕
 class Camera :
         public T_Component
 {
 public:
-    //以下为摄像机内参
+    //摄像机视角(单位：弧度）
+    float cameraFov;
 
-    /// <summary>
-    /// 近屏幕到相机距离
-    /// </summary>
-    float closeScreen;
-    /// <summary>
-    /// 远屏幕到相机的距离
-    /// </summary>
-    float farScreen;
-    /// <summary>
-    /// 近屏幕（显示屏幕）宽
-    /// </summary>
-    int screenX;
-    /// <summary>
-    /// 近屏幕高
-    /// </summary>
-    int screenY;
-    /// <summary>
-    /// 一单位距离转化为多少屏幕像素的比率
-    /// </summary>
-    float screenRate;
-    //TODO 编写相机参数矩阵
 
 };
-
 class T_Render :
-    public T_IManager
+        public T_IManager
 {
 public:
     unique_ptr<Camera> camera;
+    /*
+     * Some Issue
+     * 怎么画地面和天际线?
+     * 我研究了一下，感觉先直接渲染地面和天际线以后再渲染墙面，就可以营造出天际线和地面的感觉
+     * 怎么处理精灵之间的前后遮罩问题？
+     * 要预处理精灵与游戏物体之间的距离。设计一个算法在每帧用On的时间排序精灵
+     * 然后远近渲染顺序。
+     * 怎么处理精灵与墙体之间的遮罩问题？
+     * 先渲染墙体，再渲染精灵，如果精灵的某列大于墙体某列，就渲染精灵该列
+     */
     void RenderUpdate(HDC hdc);
-
+    vector<float> wallDepth;
+    int screenWidth;
+    int screenHeight;
 };
 
-class Image :
-    public T_Component
+class Sprite :
+        public T_Component
 {
     unique_ptr<T_Graph> image;
 
 };
+
 
