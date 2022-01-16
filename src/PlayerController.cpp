@@ -16,5 +16,6 @@ void PlayerController::Update()
 	else if (InputManager::instance->GetKeyDown('A')) {
 		move.x -= 1;
 	}
+
 	//TODO ÒÆ¶¯
 }

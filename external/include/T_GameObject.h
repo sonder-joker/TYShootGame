@@ -4,7 +4,7 @@
 #include "T_Graph.h"
 /*
 * 
-* ²ÉÓÃECS¼Ü¹¹µÄÈýÎ¬×é¼þ
+* ï¿½ï¿½ï¿½ï¿½ECSï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½
 * 
 * TsukuYomi
 * 
@@ -14,23 +14,23 @@ class T_GameObject;
 class T_GameObjectManager;
 
 /// <summary>
-/// ¹ÜÀíÆ÷½Ó¿Ú
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
 /// </summary>
 class T_IManager {
 public:
  	/// <summary>
- 	/// »ñµÃ¹ÜÀíÆ÷ID,ÓÎÏ·¸ù¾Ý¹ÜÀíÆ÷IDË³Ðò½øÐÐ¸üÐÂ
+ 	/// ï¿½ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ID,ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½IDË³ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½
  	/// </summary>
-	/// <return>·µ»ØÎ¨Ò»¹ÜÀíÆ÷ID</return>
+	/// <return>ï¿½ï¿½ï¿½ï¿½Î¨Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ID</return>
  	virtual int GetManagerID() = 0;
-	virtual void Update() = 0;
-	virtual void UpdateLate() = 0;
-	virtual void FixedUpdate() = 0;
-	virtual void KeyAction(int KeyType, int ActionType) = 0;
-	virtual void MouseAction(int x, int y, int ActionType) = 0;
+	virtual void Update(){};
+	virtual void UpdateLate(){};
+	virtual void FixedUpdate() {};
+	virtual void KeyAction(int KeyType, int ActionType){};
+	virtual void MouseAction(int x, int y, int ActionType){};
 };
 /// <summary>
-/// ³¡¾°»ùÀà
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 class T_Scene {
 public:
@@ -49,43 +49,43 @@ public:
 	T_GameObject& gameObject;
 	virtual void Start();
 	/// <summary>
-	/// Ã¿Ö¡äÖÈ¾Ç°µ÷ÓÃÒ»´Î
+	/// Ã¿Ö¡ï¿½ï¿½È¾Ç°ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	/// </summary>
 	virtual void Update();
 	/// <summary>
-	/// Ã¿Ö¡äÖÈ¾ºóµ÷ÓÃÒ»´Î
+	/// Ã¿Ö¡ï¿½ï¿½È¾ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	/// </summary>
 	virtual void UpdateLate();
 	/// <summary>
-	/// ¹Ì¶¨Ã¿Ãëµ÷ÓÃÊý´Î
+	/// ï¿½Ì¶ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
 	virtual void FixedUpdate();
 	/// <summary>
-	/// ÎïÆ·´Ý»ÙÇ°µ÷ÓÃÒ»´Î
+	/// ï¿½ï¿½Æ·ï¿½Ý»ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	/// </summary>
 	virtual void OnDestroy();
 	/// <summary>
-	/// ¶Ô¼üÅÌ²Ù×÷ÏìÓ¦
+	/// ï¿½Ô¼ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
 	/// </summary>
-	/// <param name="ActionType">¼üÅÌ²Ù×÷ÀàÐÍ</param>
+	/// <param name="ActionType">ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
 	virtual void KeyAction(int KeyType, int ActionType);
 	/// <summary>
-	/// ¶ÔÊó±ê²Ù×÷ÏìÓ¦
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
 	/// </summary>
-	/// <param name="x">Êó±êÖ¸ÕëxÖá×ø±ê</param>
-	/// <param name="y">Êó±êÖ¸ÕëyÖá×ø±ê</param>
-	/// <param name="MouseAction">Êó±ê²Ù×÷ÀàÐÍ</param>
+	/// <param name="x">ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+	/// <param name="y">ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
+	/// <param name="MouseAction">ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</param>
 	virtual void MouseAction(int x, int y, int MouseAction);
 	/// <summary>
-	/// ½«¸Ã×é¼þ¹ÒÔØµ½ÓÎÏ·ÎïÌåÉÏ
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	/// </summary>
-	/// <param name="gameObject">±»¹ÒÔØµÄÓÎÏ·ÎïÌå</param>
+	/// <param name="gameObject">ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½</param>
 	void JoinTo(unique_ptr<T_GameObject> gameObject);
 	bool isDestroy = false;
 	bool isActive = true;
 };
 /// <summary>
-/// ×ª»»
+/// ×ªï¿½ï¿½
 /// </summary>
 class T_Transform {
 public:
@@ -94,21 +94,21 @@ public:
 	T_Vector3 position;
 	T_Vector3 rotation;
 	/// <summary>
-	/// ½«¸¸×ø±êÏµÎªÊÀ½çµÄtransform×ª»»Îª¸¸×ø±êÏµÎª×ÔÉíµÄtransform£¨Ïà¶ÔÎ»ÖÃÓëÐý×ª²»±ä£©
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÎªï¿½ï¿½ï¿½ï¿½ï¿½transform×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÎªï¿½ï¿½ï¿½ï¿½ï¿½transformï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ä£©
 	/// </summary>
-	/// <param name="transform">Òª×ö×ª»»µÄtransform</param>
-	/// <returns>×ª»»½á¹û</returns>
+	/// <param name="transform">Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½transform</param>
+	/// <returns>×ªï¿½ï¿½ï¿½ï¿½ï¿½</returns>
 	T_Transform WorldToLocalTransform(const T_Transform& transform);
 	/// <summary>
-	/// ½«¸¸×ø±êÏµÎª×ÔÉíµÄtransform×ª»»Îª¸¸×ø±êÏµÎªÊÀ½çµÄtransform£¨Ïà¶ÔÎ»ÖÃÓëÐý×ª²»±ä£©
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÎªï¿½ï¿½ï¿½ï¿½ï¿½transform×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÎªï¿½ï¿½ï¿½ï¿½ï¿½transformï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ä£©
 	/// </summary>
-	/// <param name="transform">Òª×ö×ª»»µÄtransform</param>
-	/// <returns>×ª»»½á¹û</returns>
+	/// <param name="transform">Òªï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½transform</param>
+	/// <returns>×ªï¿½ï¿½ï¿½ï¿½ï¿½</returns>
 	T_Transform LocalToWorldTransform(const T_Transform& transform);
 };
 
 /// <summary>
-/// ÓÎÏ·ÊµÌå
+/// ï¿½ï¿½Ï·Êµï¿½ï¿½
 /// </summary>
 class T_GameObject{
 public:
@@ -123,12 +123,13 @@ public:
 };
 
 /// <summary>
-/// ÓÎÏ·ÊµÌå¹ÜÀíÆ÷£¬¹ÜÀíÆ÷IDÎÞÐ§
+/// ï¿½ï¿½Ï·Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½Ð§
 /// </summary>
 class T_GameObjectManager:
         public T_IManager
 {
 public:
+    int GetManagerID() override {return 1;};
     T_GameObjectManager();
     vector<unique_ptr<T_GameObject>> gameObjectArray;
     unique_ptr<T_GameObject>& AddGameObject(unique_ptr<T_GameObject> sprite);

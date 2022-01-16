@@ -28,9 +28,10 @@ T_Map::T_Map(string mapFilePath) {
 Rast T_Map::getBlockTypeAt(T_Vector3 pos) {
     int rx=(int)pos.x;
     int rz=(int)pos.z;
-    //Á½ÖÖ¿ÕÇé¿ö
+    //ï¿½ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½
     if(rx<0||rx>=mapWidth||rz<0||rz>=mapHeight) return Rast(mapWallSprite[0],0);
     if(blockType[rx+rz*mapWidth]==0) return Rast(mapWallSprite[0],0);
+
     Rast ret(mapWallSprite[blockType[rx+rz*mapWidth]],0);
     float fx=pos.x-rx;fx=min(fx,1-fx);
     float fz=pos.z-rz;fz=min(fz,1-fz);

@@ -2,13 +2,15 @@
 #include "T_Render.h"
 T_GameObjectManager::T_GameObjectManager()
 {
-	//TODO ³õÊ¼»¯
+	//TODO ï¿½ï¿½Ê¼ï¿½ï¿½
 }
 unique_ptr<T_GameObject>& T_GameObjectManager::AddGameObject(unique_ptr<T_GameObject> gameObject)
 {
 	gameObjectArray.push_back(gameObject);
 	return gameObject;
 }
+
+
 
 void T_GameObjectManager::ClearGameObject()
 {
@@ -188,15 +190,15 @@ T_Transform::T_Transform(const T_Vector3& pos, const T_Vector3& rot)
 
 T_Transform T_Transform::WorldToLocalTransform(const T_Transform& transform)
 {
-	//¼ÙÉè½«Ö÷±ä»»¶ÔÆëÊÀ½ç×ø±êÏµ£¬Í¬Ê±¸´ÖÆÖ÷±ä»»µÄ²Ù×÷µ½Ï£Íû±ä»»ÖÐ
+	//ï¿½ï¿½ï¿½è½«ï¿½ï¿½ï¿½ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä»»ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ä»»ï¿½ï¿½
 	T_Transform ret = T_Transform(transform.position, transform.rotation);
-	//½«Ö÷±ä»»ÒÆ¶¯µ½ÊÀ½ç×ø±êÏµÔ­µã
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ä»»ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÔ­ï¿½ï¿½
 	ret.position = ret.position - position;
-	//ÕâÀïÒ²Ðí¿ÉÒÔÓÅ»¯
+	//ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½
 	float sinx = sinf(-rotation.x), cosx = cosf(-rotation.x);
 	float siny = sinf(-rotation.y), cosy = cosf(-rotation.y);
 	float sinz = sinf(-rotation.z), cosz = cosf(-rotation.z);
-	//»ñµÃÖ÷±ä»»Ïà¶ÔÓÚÊÀ½ç×ø±êÏµµÄÐý×ª¾ØÕó
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
 	T_Matrix3 xRotMatrix = T_Matrix3(
 		1, 0, 0,
 		0, cosx, -sinx,
@@ -212,11 +214,11 @@ T_Transform T_Transform::WorldToLocalTransform(const T_Transform& transform)
 		sinz, cosz, 0,
 		0, 0, 1
 	);
-	//±ä»»ÓëÖ÷±ä»»Ò»ÆðÐý×ªÊ±µÄ×ø±êÏà¶Ô±ä»»
+	//ï¿½ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ä»»Ò»ï¿½ï¿½ï¿½ï¿½×ªÊ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ä»»
 	ret.position = xRotMatrix * ret.position;
 	ret.position = yRotMatrix * ret.position;
 	ret.position = zRotMatrix * ret.position;
-	//±ä»»ÓëÖ÷±ä»»Ò»ÆðÐý×ªÊ±µÄ½Ç¶ÈÏà¶Ô±ä»»
+	//ï¿½ä»»ï¿½ï¿½ï¿½ï¿½ï¿½ä»»Ò»ï¿½ï¿½ï¿½ï¿½×ªÊ±ï¿½Ä½Ç¶ï¿½ï¿½ï¿½Ô±ä»»
 	ret.rotation = ret.rotation - rotation;
 	return ret;
 }
