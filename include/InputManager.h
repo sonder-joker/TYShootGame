@@ -15,7 +15,7 @@ public:
 
     int GetManagerID() override {return 4;}
 
-    static unique_ptr<InputManager> instance;
+    static InputManager* instance;
     static InputManager& GetInstance(){return *instance;}
     bool isKeyDown[256];
     bool isKeyUp[256];

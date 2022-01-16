@@ -191,7 +191,9 @@ void T_Graph::PaintRegion(HBITMAP in_hbitmap, HDC destDC, int destX, int destY,
 						  float ratio, int rotType, BYTE alpha)  
 {
 	int width = (int)(regionWidth*ratio);
+	width = max(1, width);
 	int height = (int)(regionHeight*ratio);
+	height = max(1, height);
 
 	BYTE* pBits = NULL;
 	BITMAPINFO bmi;

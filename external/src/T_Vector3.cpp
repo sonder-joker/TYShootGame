@@ -2,9 +2,9 @@
 
 T_Vector3::T_Vector3(const T_Vector3& v)
 {
-    x = v.x;
-    y = v.y;
-    z = v.z;
+    val[0] = v.x;
+    val[1] = v.y;
+    val[2] = v.z;
 }
 
 
@@ -15,7 +15,10 @@ T_Vector3::~T_Vector3(void)
 
 T_Vector3 T_Vector3::operator=(const T_Vector3& v)
 {
-    return T_Vector3(v);
+    val[0] = v.x;
+    val[1] = v.y;
+    val[2] = v.z;
+    return *this;
 }
 
 T_Vector3 T_Vector3::operator+(const T_Vector3& v)

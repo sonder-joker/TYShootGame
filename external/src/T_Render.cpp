@@ -30,20 +30,21 @@ void T_Render::RenderUpdate(HDC hdc)
         float nowX=playerRot.x-camera->cameraFov/2+lineNum*camera->cameraFov/screenWidth;
         float cosX= cosf(nowX);
         float sinX= sinf(nowX);
-        for(float add=LENGHT_SINGLE_VISIT_STEP;add<MAX_VISIT_LENGHT;add+=LENGHT_SINGLE_VISIT_STEP){
+        for(float offset=LENGHT_SINGLE_VISIT_STEP;offset<MAX_VISIT_LENGHT;offset+=LENGHT_SINGLE_VISIT_STEP){
             touchPos.x+=cosX*LENGHT_SINGLE_VISIT_STEP;
             touchPos.z+=sinX*LENGHT_SINGLE_VISIT_STEP;
             Rast rast=map.getBlockTypeAt(touchPos);
             if(rast.graphIndex!=0){
-                wallDepth[lineNum]=add;
-                float lenToWall=add*cosf(nowX-playerRot.x)/3;
+                wallDepth[lineNum]=offset;
+                float lenToWall=offset*cosf(nowX-playerRot.x)/3;
                 float ratio=1/lenToWall;
                 T_Graph::PaintRegion(T_Map::mapWallSprite[rast.graphIndex].GetBmpHandle(),
                                      hdc,
                                      lineNum,midHeight-T_Map::TEXTURE_HEIGHT*ratio/2,
                                      rast.x*T_Map::TEXTURE_WIDTH,0,
                                      1,T_Map::TEXTURE_HEIGHT,
-                                     ratio);
+                                     ratio
+                );
                 break;
             }
         }

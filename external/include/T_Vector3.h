@@ -10,7 +10,7 @@ struct T_Vector3
 {
 public:
 	T_Vector3(void) { x = y = z = 0; };
-	T_Vector3(float x1, float y1, float z1) { x = x1, y = y1, z = z1; };
+	T_Vector3(float x1, float y1, float z1) { val[0] = x1, val[1] = y1, val[2] = z1; };
 	T_Vector3(const T_Vector3& v);
 
 	T_Vector3 operator =(const T_Vector3& v); //¸³ÖµÔËËã·ûÖØÔØ

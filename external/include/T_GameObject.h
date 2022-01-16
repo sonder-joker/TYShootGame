@@ -8,7 +8,7 @@ class T_GameObjectManager;
 
 class T_IManager {
 public:
- 	virtual int GetManagerID() = 0;
+    virtual int GetManagerID() { return -1; };
 	virtual void Update(){};
     virtual void Update(HDC hdc){};
 	virtual void UpdateLate(){};
@@ -22,7 +22,7 @@ public:
 	static T_Scene* activeScene;
     static T_Scene& GetActiveScene(){return *activeScene;};
 	virtual void LoadScene() = 0;
-	map<int, unique_ptr<T_IManager> > ManagerMap;
+	vector<shared_ptr<T_IManager>> ManagerMap;
 	unique_ptr<T_GameObjectManager> gameObjectManager;
 	unique_ptr<T_IManager> renderManager;
 };

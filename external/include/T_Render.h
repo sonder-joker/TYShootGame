@@ -9,7 +9,7 @@ class Camera :
 public:
     explicit Camera(T_GameObject& tGameObject);
     string GetComponentName()override{return "camera";}
-    float cameraFov=0.7;
+    float cameraFov=1.5;
 };
 class T_Render :
         public T_IManager

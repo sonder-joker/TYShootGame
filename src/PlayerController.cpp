@@ -11,11 +11,11 @@ void PlayerController::Update()
 		move.z -= 1;
 	}
 	if (InputManager::GetInstance().GetKeyDown('D')) {
-		move.x += 1;
+		gameObject.transform.rotation.x += 0.05;
 	}
 	else if (InputManager::GetInstance().GetKeyDown('A')) {
-		move.x -= 1;
+		gameObject.transform.rotation.x -= 0.05;
 	}
-
-	//TODO ÒÆ¶¯
+	gameObject.transform.position.x += move.z * v * cosf(gameObject.transform.rotation.x);
+	gameObject.transform.position.z += move.z * v * sinf(gameObject.transform.rotation.x);
 }

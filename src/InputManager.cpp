@@ -1,11 +1,10 @@
 #include "InputManager.h"
 
-
-unique_ptr<InputManager> InputManager::instance = make_unique<InputManager>();
+InputManager* InputManager::instance=nullptr;
 
 InputManager::InputManager()
 {
-	
+	instance = this;
 }
 
 bool InputManager::GetKeyDown(int keyType)

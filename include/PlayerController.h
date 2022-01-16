@@ -7,7 +7,8 @@ public:
 	/// <summary>
 	/// 玩家行走速度
 	/// </summary>
-	const float v = 0.3;
+	explicit PlayerController(T_GameObject& gameObject) :T_Component(gameObject) {};
+	const float v = 0.05;
 	void Update() override;
 };
 
