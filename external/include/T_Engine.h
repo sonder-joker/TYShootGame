@@ -19,7 +19,7 @@ public:
 	static HINSTANCE m_hInstance;		// 实例句柄
 	static T_Engine* pEngine;			// 本类静态指针(必须指向本类继承类)
 
-protected:
+public:
 	ULONG_PTR ptrGdiplusToken;			// 对GDI+的引用
 
 	LPCTSTR wndClass;					// 窗口类名称

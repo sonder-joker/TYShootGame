@@ -1,31 +1,34 @@
 #include "InputManager.h"
 
+
+unique_ptr<InputManager> InputManager::instance = make_unique<InputManager>();
+
 InputManager::InputManager()
 {
 	
 }
 
-inline bool InputManager::GetKeyDown(int keyType)
+bool InputManager::GetKeyDown(int keyType)
 {
 	return isKeyDown[keyType];
 }
 
-inline bool InputManager::GetKeyUp(int keyType)
+bool InputManager::GetKeyUp(int keyType)
 {
 	return isKeyUp[keyType];
 }
 
-inline T_Vector3 InputManager::GetMousePos()
+T_Vector3 InputManager::GetMousePos()
 {
 	return mousePos;
 }
 
-inline bool InputManager::GetMouseDown(int keyType)
+bool InputManager::GetMouseDown(int keyType)
 {
 	return isMouseDown[keyType] == 2;
 }
 
-inline bool InputManager::GetMouseUp(int keyType) {
+bool InputManager::GetMouseUp(int keyType) {
 	return isMouseDown[keyType] == 1;
 }
 

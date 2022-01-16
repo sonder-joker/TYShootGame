@@ -4,9 +4,9 @@
 #include <exception>
 #include <stdexcept>
 
-class T_Matrix3;
+struct T_Matrix3;
 
-class T_Vector3
+struct T_Vector3
 {
 public:
 	T_Vector3(void) { x = y = z = 0; };
@@ -44,7 +44,7 @@ public:
 	float& z=val[2];
 };
 
-class T_Matrix3
+struct T_Matrix3
 {
 public:
 	float val[9] = { 0,0,0,0,0,0,0,0,0 };

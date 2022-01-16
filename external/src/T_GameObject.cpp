@@ -4,12 +4,13 @@ T_GameObjectManager::T_GameObjectManager()
 {
 	//TODO ��ʼ��
 }
-unique_ptr<T_GameObject>& T_GameObjectManager::AddGameObject(unique_ptr<T_GameObject> gameObject)
+T_GameObject& T_GameObjectManager::AddGameObject(unique_ptr<T_GameObject> gameObject)
 {
-	gameObjectArray.push_back(gameObject);
-	return gameObject;
+	gameObjectArray.push_back(move(gameObject));
+	return *gameObjectArray[gameObjectArray.size()-1];
 }
 
+T_Scene* T_Scene::activeScene=nullptr;
 
 
 void T_GameObjectManager::ClearGameObject()
@@ -117,9 +118,9 @@ void T_GameObjectManager::MouseAction(int x, int y, int t)
 	}
 }
 
-T_GameObject::T_GameObject()
+T_GameObject::T_GameObject(string name)
 {
-	
+	this->name=name;
 }
 
 void T_GameObject::ClearComponent()
@@ -127,8 +128,8 @@ void T_GameObject::ClearComponent()
 	auto pSlow = componentArray.begin();
 	auto pFast = componentArray.begin();
 	while (pFast != componentArray.end()) {
-		bool slowIsDestroy = pSlow->get()->isDestroy;
-		bool fastIsDestroy = pFast->get()->isDestroy;
+		bool slowIsDestroy = (*pSlow)->isDestroy;
+		bool fastIsDestroy = (*pFast)->isDestroy;
 		if (slowIsDestroy && fastIsDestroy) {
 			++pFast;
 		}
@@ -167,14 +168,23 @@ void T_Component::OnDestroy()
 {
 }
 
-void T_Component::JoinTo(unique_ptr<T_GameObject> gameObject)
-{
+void T_Component::KeyAction(int KeyType, int ActionType) {
+
+}
+
+void T_Component::MouseAction(int x, int y, int MouseAction) {
+
+}
+
+T_Component::T_Component(T_GameObject& tGameObject):gameObject(tGameObject) {
+
 }
 
 T_Scene::T_Scene()
 {
+    activeScene=this;
 	gameObjectManager = make_unique<T_GameObjectManager>();
-	renderManager = make_unique<T_Render>();
+	//renderManager = make_unique<T_Render>();
 }
 
 T_Transform::T_Transform()
@@ -190,15 +200,11 @@ T_Transform::T_Transform(const T_Vector3& pos, const T_Vector3& rot)
 
 T_Transform T_Transform::WorldToLocalTransform(const T_Transform& transform)
 {
-	//���轫���任������������ϵ��ͬʱ�������任�Ĳ�����ϣ���任��
 	T_Transform ret = T_Transform(transform.position, transform.rotation);
-	//�����任�ƶ�����������ϵԭ��
 	ret.position = ret.position - position;
-	//����Ҳ������Ż�
 	float sinx = sinf(-rotation.x), cosx = cosf(-rotation.x);
 	float siny = sinf(-rotation.y), cosy = cosf(-rotation.y);
 	float sinz = sinf(-rotation.z), cosz = cosf(-rotation.z);
-	//������任�������������ϵ����ת����
 	T_Matrix3 xRotMatrix = T_Matrix3(
 		1, 0, 0,
 		0, cosx, -sinx,
@@ -214,11 +220,9 @@ T_Transform T_Transform::WorldToLocalTransform(const T_Transform& transform)
 		sinz, cosz, 0,
 		0, 0, 1
 	);
-	//�任�����任һ����תʱ��������Ա任
 	ret.position = xRotMatrix * ret.position;
 	ret.position = yRotMatrix * ret.position;
 	ret.position = zRotMatrix * ret.position;
-	//�任�����任һ����תʱ�ĽǶ���Ա任
 	ret.rotation = ret.rotation - rotation;
 	return ret;
 }
@@ -249,4 +253,5 @@ T_Transform T_Transform::LocalToWorldTransform(const T_Transform& transform)
 	ret.position = zRotMatrix * ret.position;
 	ret.position = ret.position + position;
 	ret.rotation = ret.rotation + rotation;
+    return ret;
 }

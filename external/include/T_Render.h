@@ -1,40 +1,53 @@
 #pragma once
 #include "T_GameObject.h"
 #include "T_Engine.h"
+#include "T_Map.h"
 
-/// <summary>
-/// ����͸�����
-/// </summary>
 class Camera :
         public T_Component
 {
 public:
-    //������ӽ�(��λ�����ȣ�
-    float cameraFov;
-
-
+    explicit Camera(T_GameObject& tGameObject);
+    string GetComponentName()override{return "camera";}
+    float cameraFov=0.7;
 };
 class T_Render :
         public T_IManager
 {
 public:
+    explicit T_Render(T_Map& map);
+    void Init(int width,int height);
     int GetManagerID() override {return 1;}
-    unique_ptr<Camera> camera;
-    /*
-     * Some Issue
-     * ��ô������������?
-     * ���о���һ�£��о���ֱ����Ⱦ�����������Ժ�����Ⱦǽ�棬�Ϳ���Ӫ�������ߺ͵���ĸо�
-     * ��ô������֮���ǰ���������⣿
-     * ҪԤ����������Ϸ����֮��ľ��롣���һ���㷨��ÿ֡��On��ʱ��������
-     * Ȼ��Զ����Ⱦ˳��
-     * ��ô��������ǽ��֮����������⣿
-     * ����Ⱦǽ�壬����Ⱦ���飬��������ĳ�д���ǽ��ĳ�У�����Ⱦ�������
-     */
+    shared_ptr<Camera> camera=nullptr;
     void RenderUpdate(HDC hdc);
-    void SetRenderVar();
+    void Update(HDC hdc)override{ RenderUpdate(hdc);}
+    void SetRenderVar(int width,int height);
+    T_Map& map;
+    HBITMAP backgroundBitmap;
     vector<float> wallDepth;
     int screenWidth;
     int screenHeight;
+
+    //常量↓
+    //最远视域距离
+    constexpr static const float MAX_VISIT_LENGHT=20.0;
+    //单步长度
+    constexpr static const float LENGHT_SINGLE_VISIT_STEP=0.05;
+
+
+    static const COLORREF SKY_COLOR_UP=RGB(0,191,255);
+    static const COLORREF SKY_COLOR_DOWN=RGB(135,206,235);
+    //天空分层数
+    static const int SKY_LEVEL=5;
+    static const COLORREF GROUND=Color::LawnGreen&0x00FFFFFF;
+
+};
+
+class SpriteManager:
+        public T_IManager{
+public:
+    int GetManagerID() override {return 523;}
+    vector<T_Component> spriteImageArray;
 };
 
 class Sprite :
@@ -43,5 +56,3 @@ class Sprite :
     unique_ptr<T_Graph> image;
 
 };
-
-

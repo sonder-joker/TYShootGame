@@ -10,9 +10,9 @@
 //地图数据存储类
 
 struct Rast{
-    Rast(T_Graph& _graph,float _x):graph(_graph),x(x){
+    Rast(int _graph,float _x):graphIndex(_graph),x(x){
     }
-    T_Graph& graph;
+    int graphIndex;
     float x;
 };
 
@@ -25,6 +25,9 @@ public:
     static bool LoadNewMapWallSprite(string spritePath);
     T_Map(string mapFilePath);
     Rast getBlockTypeAt(T_Vector3 pos);
+
+    static const int TEXTURE_HEIGHT=64;
+    static const int TEXTURE_WIDTH=64;
 };
 
 

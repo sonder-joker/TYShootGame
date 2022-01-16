@@ -12,7 +12,11 @@ class InputManager :
     public T_IManager
 {
 public:
-    static unique_ptr<InputManager>& instance;
+
+    int GetManagerID() override {return 4;}
+
+    static unique_ptr<InputManager> instance;
+    static InputManager& GetInstance(){return *instance;}
     bool isKeyDown[256];
     bool isKeyUp[256];
     T_Vector3 mousePos;
@@ -24,16 +28,16 @@ public:
     /// </summary>
     /// <param name="keyType">按键类型(参考wParam)</param>
     /// <returns></returns>
-    inline bool GetKeyDown(int keyType);
+    bool GetKeyDown(int keyType);
     /// <summary>
     /// 获取按键是否弹起
     /// </summary>
     /// <param name="keyType">按键类型(参考wParam)</param>
     /// <returns></returns>
-    inline bool GetKeyUp(int keyType);
-    inline T_Vector3 GetMousePos();
-    inline bool GetMouseDown(int keyType);
-    inline bool GetMouseUp(int keyType);
+    bool GetKeyUp(int keyType);
+    T_Vector3 GetMousePos();
+    bool GetMouseDown(int keyType);
+    bool GetMouseUp(int keyType);
     void KeyAction(int KeyType, int Action) override;
     void MouseAction(int x, int y, int Action) override;
     void Update() override;

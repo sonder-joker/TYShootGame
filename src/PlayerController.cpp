@@ -4,16 +4,16 @@
 void PlayerController::Update()
 {
 	T_Vector3 move;
-	if (InputManager::instance->GetKeyDown('W')) {
+	if (InputManager::GetInstance().GetKeyDown('W')) {
 		move.z += 1;
 	}
-	else if (InputManager::instance->GetKeyDown('S')) {
+	else if (InputManager::GetInstance().GetKeyDown('S')) {
 		move.z -= 1;
 	}
-	if (InputManager::instance->GetKeyDown('D')) {
+	if (InputManager::GetInstance().GetKeyDown('D')) {
 		move.x += 1;
 	}
-	else if (InputManager::instance->GetKeyDown('A')) {
+	else if (InputManager::GetInstance().GetKeyDown('A')) {
 		move.x -= 1;
 	}
 

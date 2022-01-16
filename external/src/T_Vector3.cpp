@@ -15,10 +15,7 @@ T_Vector3::~T_Vector3(void)
 
 T_Vector3 T_Vector3::operator=(const T_Vector3& v)
 {
-    x = v.x;
-    y = v.y;
-    z = v.z;
-    return *this;
+    return T_Vector3(v);
 }
 
 T_Vector3 T_Vector3::operator+(const T_Vector3& v)

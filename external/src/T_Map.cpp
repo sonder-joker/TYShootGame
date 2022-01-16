@@ -5,13 +5,18 @@
 #include "T_Map.h"
 #include <fstream>
 
-bool T_Map::LoadNewMapWallSprite(string path) {
+T_Graph T_Map::mapWallSprite[100]= {};
 
-    return false;
+bool T_Map::LoadNewMapWallSprite(string path="test") {
+    mapWallSprite[1]=T_Graph(L"./Map/Sprite/1.png");
+    mapWallSprite[2]=T_Graph(L"./Map/Sprite/2.png");
+    mapWallSprite[3]=T_Graph(L"./Map/Sprite/3.png");
+    return true;
 }
 
 T_Map::T_Map(string mapFilePath) {
     fstream file(mapFilePath);
+    LoadNewMapWallSprite();
     if(file.is_open()){
         file>>mapHeight>>mapWidth;
         file>>playerSpawnPoint.x>>playerSpawnPoint.z;
@@ -28,11 +33,15 @@ T_Map::T_Map(string mapFilePath) {
 Rast T_Map::getBlockTypeAt(T_Vector3 pos) {
     int rx=(int)pos.x;
     int rz=(int)pos.z;
-    //���ֿ����
-    if(rx<0||rx>=mapWidth||rz<0||rz>=mapHeight) return Rast(mapWallSprite[0],0);
-    if(blockType[rx+rz*mapWidth]==0) return Rast(mapWallSprite[0],0);
 
-    Rast ret(mapWallSprite[blockType[rx+rz*mapWidth]],0);
+
+
+    if(rx<0||rx>=mapWidth||rz<0||rz>=mapHeight) return Rast(0,0);
+    if(blockType[rx+rz*mapWidth]==0) return Rast(0,0);
+
+
+
+    Rast ret(blockType[rx+rz*mapWidth],0);
     float fx=pos.x-rx;fx=min(fx,1-fx);
     float fz=pos.z-rz;fz=min(fz,1-fz);
     ret.x=max(fx,fz);

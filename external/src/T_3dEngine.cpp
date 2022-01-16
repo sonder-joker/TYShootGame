@@ -21,7 +21,7 @@ void T_3dEngine::GamePaint(HDC hdc)
 		auto& manager = managerItor.second;
 		manager->Update();
 	}
-	//TODO RenderUpdate
+    scene->renderManager->Update(hdc);
 	scene->gameObjectManager->UpdateLate();
 	for (auto& managerItor : scene->ManagerMap) {
 		auto& manager = managerItor.second;
