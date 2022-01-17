@@ -3,7 +3,7 @@
 #include "T_Engine.h"
 #include "T_Map.h"
 
-
+class Sprite;
 class Camera :
         public T_Component
 {
@@ -27,6 +27,9 @@ public:
     T_Map& map;
     HBITMAP backgroundBitmap;
     vector<Rast> wallDepth;
+    vector<float> wallDistance;
+    vector<Rast> spriteRast;
+    vector<shared_ptr<Sprite>> spriteArray;
     int screenWidth;
     int screenHeight;
 
@@ -60,6 +63,6 @@ public:
 class Sprite :
         public T_Component
 {
-    unique_ptr<T_Graph> image;
-
+    explicit Sprite(T_GameObject& gameObject, int _graphIndex) :T_Component(gameObject) { graphIndex = _graphIndex; }
+    int graphIndex;
 };

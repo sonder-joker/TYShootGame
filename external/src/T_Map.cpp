@@ -11,6 +11,7 @@ bool T_Map::LoadNewMapWallSprite(string path="test") {
     mapWallSprite[1]=T_Graph(L"./Map/Sprite/1.png");
     mapWallSprite[2]=T_Graph(L"./Map/Sprite/2.png");
     mapWallSprite[3]=T_Graph(L"./Map/Sprite/3.png");
+    mapWallSprite[50] = T_Graph(L"./Map/Sprite/flower.png");
     return true;
 }
 

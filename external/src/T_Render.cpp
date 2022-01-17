@@ -27,6 +27,7 @@ void T_Render::RenderUpdate(HDC hdc)
     for(int lineNum=0;lineNum<screenWidth;++lineNum){
         T_Vector3 touchPos=playerPos;
         wallDepth[lineNum]=Rast(0,0,0);
+        wallDistance[lineNum] = 1.0*0x3f3f3f3f;
         float nowX=playerRot.x-camera->cameraFov/2+lineNum*camera->cameraFov/screenWidth;
         float cosX= cosf(nowX);
         float sinX= sinf(nowX);
@@ -36,6 +37,7 @@ void T_Render::RenderUpdate(HDC hdc)
             Rast rast=map.getBlockTypeAt(touchPos);
             if(rast.graphIndex==-1) break;
             if(rast.graphIndex!=0){
+                wallDistance[lineNum] = offset;
                 float lenToWall=offset*cosf(nowX-playerRot.x)/5;
                 rast.offset=lenToWall;
                 wallDepth[lineNum]=rast;
@@ -44,9 +46,15 @@ void T_Render::RenderUpdate(HDC hdc)
         }
     }
     PaintRaster(hdc);
-    // 绘制精灵
-
-
+    //绘制精灵:
+    //获取精灵
+    //给精灵按照远近顺序排序
+    //按顺序获取精灵
+    //计算精灵是否在渲染屏幕内
+    //为精灵的每个光栅计算是否应该被墙壁遮挡
+    //渲染，回到步骤3
+    
+    //
     SelectObject(memDC,tempBitmap);
     DeleteObject(memDC);
     DeleteObject(tempBitmap);
@@ -56,6 +64,8 @@ void T_Render::Init(int width, int height) {
     SetRenderVar(width,height);
     HDC memDC= CreateCompatibleDC(GetDC(T_Engine::pEngine->m_hWnd));
     wallDepth=std::vector<Rast>(width);
+    wallDistance = std::vector<float>(width);
+    spriteRast = std::vector<Rast>(width);
     //如果使用内存设备上下文会变成单色Bitmap
     backgroundBitmap= CreateCompatibleBitmap(GetDC(T_Engine::pEngine->m_hWnd),width,height);
 
@@ -102,6 +112,7 @@ void T_Render::PaintRaster(HDC destDC) {
             SelectObject(memDC,T_Map::mapWallSprite[rast.graphIndex].GetBmpHandle());
             StretchBlt(destDC,screenLine,midHeight-T_Map::TEXTURE_HEIGHT/(rast.offset*2),1,T_Map::TEXTURE_HEIGHT/rast.offset,
                        memDC,rast.x*T_Map::TEXTURE_WIDTH,0,1,T_Map::TEXTURE_HEIGHT,SRCCOPY);
+            
         }
     }
     SelectObject(memDC,oldBitmap);
@@ -114,7 +125,8 @@ Camera::Camera(T_GameObject& tGameObject): T_Component(tGameObject) {
 }
 
 void Camera::KeyAction(int KeyType, int ActionType) {
-    if(ActionType==KEY_DOWN){
+    /*
+    if (ActionType == KEY_DOWN) {
        if(KeyType=='T'){
            cameraFov+=0.05;
        }
@@ -122,4 +134,5 @@ void Camera::KeyAction(int KeyType, int ActionType) {
            cameraFov-=0.05;
        }
     }
+    */
 }
