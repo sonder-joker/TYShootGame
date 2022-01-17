@@ -36,7 +36,7 @@ Rast T_Map::getBlockTypeAt(T_Vector3 pos) {
 
 
 
-    if(rx<0||rx>=mapWidth||rz<0||rz>=mapHeight) return Rast(0,0);
+    if(rx<0||rx>=mapWidth||rz<0||rz>=mapHeight) return Rast(-1,0);
     if(blockType[rx+rz*mapWidth]==0) return Rast(0,0);
 
 

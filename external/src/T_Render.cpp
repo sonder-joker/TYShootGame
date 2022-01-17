@@ -26,7 +26,7 @@ void T_Render::RenderUpdate(HDC hdc)
     T_Vector3 playerRot=camera->gameObject.transform.rotation;
     for(int lineNum=0;lineNum<screenWidth;++lineNum){
         T_Vector3 touchPos=playerPos;
-        wallDepth[lineNum]=MAX_VISIT_LENGHT+1;
+        wallDepth[lineNum]=Rast(0,0,0);
         float nowX=playerRot.x-camera->cameraFov/2+lineNum*camera->cameraFov/screenWidth;
         float cosX= cosf(nowX);
         float sinX= sinf(nowX);
@@ -34,22 +34,16 @@ void T_Render::RenderUpdate(HDC hdc)
             touchPos.x+=cosX*LENGHT_SINGLE_VISIT_STEP;
             touchPos.z+=sinX*LENGHT_SINGLE_VISIT_STEP;
             Rast rast=map.getBlockTypeAt(touchPos);
+            if(rast.graphIndex==-1) break;
             if(rast.graphIndex!=0){
-                wallDepth[lineNum]=offset;
-                float lenToWall=offset*cosf(nowX-playerRot.x)/3;
-                float ratio=1/lenToWall;
-                T_Graph::PaintRegion(T_Map::mapWallSprite[rast.graphIndex].GetBmpHandle(),
-                                     hdc,
-                                     lineNum,midHeight-T_Map::TEXTURE_HEIGHT*ratio/2,
-                                     rast.x*T_Map::TEXTURE_WIDTH,0,
-                                     1,T_Map::TEXTURE_HEIGHT,
-                                     ratio
-                );
+                float lenToWall=offset*cosf(nowX-playerRot.x)/5;
+                rast.offset=lenToWall;
+                wallDepth[lineNum]=rast;
                 break;
             }
         }
     }
-
+    PaintRaster(hdc);
     // 绘制精灵
 
 
@@ -61,7 +55,7 @@ void T_Render::RenderUpdate(HDC hdc)
 void T_Render::Init(int width, int height) {
     SetRenderVar(width,height);
     HDC memDC= CreateCompatibleDC(GetDC(T_Engine::pEngine->m_hWnd));
-    wallDepth=std::vector<float>(width);
+    wallDepth=std::vector<Rast>(width);
     //如果使用内存设备上下文会变成单色Bitmap
     backgroundBitmap= CreateCompatibleBitmap(GetDC(T_Engine::pEngine->m_hWnd),width,height);
 
@@ -98,6 +92,34 @@ T_Render::T_Render(T_Map& tmap):map(tmap) {
     Init(T_Engine::pEngine->wndWidth,T_Engine::pEngine->wndHeight);
 }
 
+void T_Render::PaintRaster(HDC destDC) {
+    int midHeight=screenHeight/2;
+    HDC memDC= CreateCompatibleDC(destDC);
+    HBITMAP oldBitmap=(HBITMAP) SelectObject(memDC,T_Map::mapWallSprite[1].GetBmpHandle());
+    for(int screenLine=0;screenLine<screenWidth;++screenLine){
+        if(wallDepth[screenLine].graphIndex > 0){
+            Rast& rast=wallDepth[screenLine];
+            SelectObject(memDC,T_Map::mapWallSprite[rast.graphIndex].GetBmpHandle());
+            StretchBlt(destDC,screenLine,midHeight-T_Map::TEXTURE_HEIGHT/(rast.offset*2),1,T_Map::TEXTURE_HEIGHT/rast.offset,
+                       memDC,rast.x*T_Map::TEXTURE_WIDTH,0,1,T_Map::TEXTURE_HEIGHT,SRCCOPY);
+        }
+    }
+    SelectObject(memDC,oldBitmap);
+    DeleteObject(memDC);
+    DeleteObject(oldBitmap);
+}
+
 Camera::Camera(T_GameObject& tGameObject): T_Component(tGameObject) {
 
+}
+
+void Camera::KeyAction(int KeyType, int ActionType) {
+    if(ActionType==KEY_DOWN){
+       if(KeyType=='T'){
+           cameraFov+=0.05;
+       }
+       if(KeyType=='Y'){
+           cameraFov-=0.05;
+       }
+    }
 }

@@ -10,10 +10,19 @@
 //地图数据存储类
 
 struct Rast{
-    Rast(int _graph,float _x):graphIndex(_graph),x(x){
+    Rast(int _graph=0,float _x=0,float offset=0):graphIndex(_graph),x(x),offset(offset){
+
+    }
+    Rast(const Rast& rast) = default;
+    Rast operator=(const Rast& rast){
+        graphIndex=rast.graphIndex;
+        x=rast.x;
+        offset=rast.offset;
+        return *this;
     }
     int graphIndex;
     float x;
+    float offset;
 };
 
 class T_Map{

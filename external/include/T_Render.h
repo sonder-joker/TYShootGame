@@ -3,6 +3,7 @@
 #include "T_Engine.h"
 #include "T_Map.h"
 
+
 class Camera :
         public T_Component
 {
@@ -10,6 +11,7 @@ public:
     explicit Camera(T_GameObject& tGameObject);
     string GetComponentName()override{return "camera";}
     float cameraFov=1.5;
+    void KeyAction(int KeyType, int ActionType)override;
 };
 class T_Render :
         public T_IManager
@@ -24,15 +26,15 @@ public:
     void SetRenderVar(int width,int height);
     T_Map& map;
     HBITMAP backgroundBitmap;
-    vector<float> wallDepth;
+    vector<Rast> wallDepth;
     int screenWidth;
     int screenHeight;
 
     //常量↓
     //最远视域距离
-    constexpr static const float MAX_VISIT_LENGHT=20.0;
+    constexpr static const float MAX_VISIT_LENGHT=5.0;
     //单步长度
-    constexpr static const float LENGHT_SINGLE_VISIT_STEP=0.05;
+    constexpr static const float LENGHT_SINGLE_VISIT_STEP=0.005;
 
 
     static const COLORREF SKY_COLOR_UP=RGB(0,191,255);
@@ -40,6 +42,11 @@ public:
     //天空分层数
     static const int SKY_LEVEL=5;
     static const COLORREF GROUND=Color::LawnGreen&0x00FFFFFF;
+
+
+    //静态绘制函数
+
+    void PaintRaster(HDC destDC);
 
 };
 
