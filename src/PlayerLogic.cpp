@@ -23,7 +23,7 @@ void PlayerLogic::Update() {
                 float rot = this->gameObject.transform.rotation.x;
                 while (dir - rot > Pi) dir -= 2 * Pi;
                 while (dir - rot < -Pi) dir += 2 * Pi;
-                if (dir - rot < 0.5f && dir - rot > -0.5f) {
+                if (dir - rot < 0.5f && dir - rot > -0.5) {
                     for (auto &component: gameObject->componentArray) {
                         if (component->GetComponentName() == "Ghost") {
                             kill += std::dynamic_pointer_cast<Ghost>(component)->BeHit();
@@ -37,8 +37,8 @@ void PlayerLogic::Update() {
             if (tx * tx + tz * tz < 4) {
                 T_Scene::activeScene->renderManager->topText = L"你的幽灵感应器咔咔作响";
             } else {
-                if (kill <= 5)
-                    T_Scene::activeScene->renderManager->topText = L"你需要击杀六只幽灵来开启旗帜";
+                if (kill <= 2)
+                    T_Scene::activeScene->renderManager->topText = L"你需要击杀幽灵来开启旗帜";
                 else
                     T_Scene::activeScene->renderManager->topText = L"快到旗帜那里去";
             }
@@ -57,7 +57,7 @@ void PlayerLogic::Update() {
             }
         }
         if (gameObject->name == "Flag") {
-            if (kill > 5) {
+            if (kill > 2 ) {
                 float tx = gameObject->transform.position.x - this->gameObject.transform.position.x;
                 float tz = gameObject->transform.position.z - this->gameObject.transform.position.z;
                 if (tx * tx + tz * tz <= 0.25) {
