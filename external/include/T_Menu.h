@@ -1,10 +1,10 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// ¸üĞÂ: 2020-12-20
-// °æÈ¨ËùÓĞ 2007-2021 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// æ›´æ–°: 2020-12-20
+// ç‰ˆæƒæ‰€æœ‰ 2007-2021 ä¸‡ç«‹ä¸­
 // (C) 2007-2021 WanLizhong All Rights Reserved
 //*******************************************************************
 
@@ -14,34 +14,34 @@
 //#include "T_Audio.h"
 
 //
-// ±¾²Ëµ¥ÀàÖ§³Ö£º
-// ´¹Ö±ÅÅÁĞ£º´¿ÎÄ×Ö°´Å¥»òÍ¼Æ¬°´Å¥
-// Ë®Æ½ÅÅÁĞ£º´¿ÎÄ×Ö°´Å¥»òÍ¼Æ¬°´Å¥
+// æœ¬èœå•ç±»æ”¯æŒï¼š
+// å‚ç›´æ’åˆ—ï¼šçº¯æ–‡å­—æŒ‰é’®æˆ–å›¾ç‰‡æŒ‰é’®
+// æ°´å¹³æ’åˆ—ï¼šçº¯æ–‡å­—æŒ‰é’®æˆ–å›¾ç‰‡æŒ‰é’®
 //
 class T_Menu
 {
 protected:
-	MENU_INFO menu_info;					// ²Ëµ¥ĞÅÏ¢
+	MENU_INFO menu_info;					// èœå•ä¿¡æ¯
 	
-	int m_index;										// µ±Ç°½¹µã²Ëµ¥Ë÷ÒıºÅ
-	bool isItemFocused;						// µ±Ç°²Ëµ¥ÊÇ·ñ»ñ½¹µã
+	int m_index;										// å½“å‰ç„¦ç‚¹èœå•ç´¢å¼•å·
+	bool isItemFocused;						// å½“å‰èœå•æ˜¯å¦è·ç„¦ç‚¹
 	
 	int lastIndex;
 	int key_index;
-	int MaxMenuItemLen;						// ×î³¤²Ëµ¥ÎÄ×Ö³¤¶È
+	int MaxMenuItemLen;						// æœ€é•¿èœå•æ–‡å­—é•¿åº¦
 
-	int bkImageAlpha;							// ±³¾°Í¼Æ¬Í¸Ã÷¶È
+	int bkImageAlpha;							// èƒŒæ™¯å›¾ç‰‡é€æ˜åº¦
 	
-	T_Graph gm_menuBkg;					// ²Ëµ¥±³¾°
-	T_Graph BtnDIB;								// ²Ëµ¥Í¼Æ¬					
-	vector<MENUITEM> gm_menuItems;			// ²Ëµ¥ÏîÄ¿
+	T_Graph gm_menuBkg;					// èœå•èƒŒæ™¯
+	T_Graph BtnDIB;								// èœå•å›¾ç‰‡					
+	vector<MENUITEM> gm_menuItems;			// èœå•é¡¹ç›®
 
-	int GetMenuIndex(int x, int y);						// ¸ù¾İµ±Ç°Êó±ê×ø±ê¼ÆËã²Ëµ¥ÏîË÷ÒıºÅ
+	int GetMenuIndex(int x, int y);						// æ ¹æ®å½“å‰é¼ æ ‡åæ ‡è®¡ç®—èœå•é¡¹ç´¢å¼•å·
 	StringAlignment GetAlignment();						
 	FontStyle GetFontStyle();
 
-	//AudioDXBuffer* m_MoveSound;						// ²Ëµ¥Êó±êÒÆ¹ıÊ±µÄÉùÒô
-	//AudioDXBuffer* m_ClickSound;						// ²Ëµ¥Êó±êµã»÷Ê±µÄÉùÒô
+	//AudioDXBuffer* m_MoveSound;						// èœå•é¼ æ ‡ç§»è¿‡æ—¶çš„å£°éŸ³
+	//AudioDXBuffer* m_ClickSound;						// èœå•é¼ æ ‡ç‚¹å‡»æ—¶çš„å£°éŸ³
 
 	//+++++++++++++++++++++
 	int wnd_width, wnd_height;
@@ -55,26 +55,26 @@ public:
 	virtual ~T_Menu(void);
 
 	void SetMenuInfo(MENU_INFO menuInfo);
-	void AddMenuItem(MENUITEM menuItem);	// Ìí¼Ó²Ëµ¥ÎÄ×ÖÏîÄ¿
+	void AddMenuItem(MENUITEM menuItem);	// æ·»åŠ èœå•æ–‡å­—é¡¹ç›®
 
 	//++++++++++++++++++++++++++++++++++++++++++++++
-	// ÉèÖÃ²Ëµ¥±³¾°Í¼Æ¬¡£Í¸Ã÷¶È¼°±³¾°ÑÕÉ«
+	// è®¾ç½®èœå•èƒŒæ™¯å›¾ç‰‡ã€‚é€æ˜åº¦åŠèƒŒæ™¯é¢œè‰²
 	void SetMenuBkg(wstring img_path, int x =0, int y=0, int alphaLevel=255);	
 	void SetMenuBkgColor(COLORREF bkgColor, int x = 0, int y = 0,int alphaLevel = 255);
-	void SetBtnBmp(	wstring img_path,				// ÉèÖÃ²Ëµ¥°´Å¥Í¼Æ¬
-								int btnWidth,						// Í¼Æ¬°´Å¥¿í
-								int btnHeight,						// Í¼Æ¬°´Å¥¸ß
-								int btnAlpha = 255);			// °´Å¥µÄÍ¸Ã÷¶È
+	void SetBtnBmp(	wstring img_path,				// è®¾ç½®èœå•æŒ‰é’®å›¾ç‰‡
+								int btnWidth,						// å›¾ç‰‡æŒ‰é’®å®½
+								int btnHeight,						// å›¾ç‰‡æŒ‰é’®é«˜
+								int btnAlpha = 255);			// æŒ‰é’®çš„é€æ˜åº¦
 	void DrawMenu(HDC hdc);
 	void SetWinSize(int width, int height) { wnd_width = width; wnd_height = height; }
 	//++++++++++++++++++++++++++++++++++++++++++++++
 
-	int MenuMouseClick(int x, int y);					// ²Ëµ¥Êó±êµã»÷ÊÂ¼ş´¦Àí
-	void MenuMouseMove(int x, int y);				// ²Ëµ¥Êó±êÒÆ¶¯ÊÂ¼ş´¦Àí
-	int MenuKeyDown(WPARAM key);					// ²Ëµ¥°´¼üÊÂ¼ş´¦Àí
+	int MenuMouseClick(int x, int y);					// èœå•é¼ æ ‡ç‚¹å‡»äº‹ä»¶å¤„ç†
+	void MenuMouseMove(int x, int y);				// èœå•é¼ æ ‡ç§»åŠ¨äº‹ä»¶å¤„ç†
+	int MenuKeyDown(WPARAM key);					// èœå•æŒ‰é”®äº‹ä»¶å¤„ç†
 
-	int GetMenuIndex(){ return m_index; }			// ·µ»Øµ±Ç°µÄm_index
-	void SetMenuIndex(int i){ m_index = i; }			// ÉèÖÃµ±Ç°µÄm_index
+	int GetMenuIndex(){ return m_index; }			// è¿”å›å½“å‰çš„m_index
+	void SetMenuIndex(int i){ m_index = i; }			// è®¾ç½®å½“å‰çš„m_index
 
 	//void SetMoveSound(AudioDXBuffer* ms_buffer);
 	//void SetClickSound(AudioDXBuffer* mc_buffer);

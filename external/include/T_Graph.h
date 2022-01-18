@@ -1,9 +1,9 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// °æÈ¨ËùÓĞ 2007-2013 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// ç‰ˆæƒæ‰€æœ‰ 2007-2013 ä¸‡ç«‹ä¸­
 // (C) 2007-2013 WanLizhong All Rights Reserved
 //*******************************************************************
 
@@ -14,56 +14,56 @@ class T_Graph
 
 {
 protected:
-	HBITMAP hBmp;		// ÒÑ¼ÓÔØÍ¼Ïñ¾ä±ú
-	int ImageWidth;		// ÒÑ¼ÓÔØÍ¼Ïñ¿í
-	int ImageHeight;	// ÒÑ¼ÓÔØÍ¼Ïñ¸ß
+	HBITMAP hBmp;		// å·²åŠ è½½å›¾åƒå¥æŸ„
+	int ImageWidth;		// å·²åŠ è½½å›¾åƒå®½
+	int ImageHeight;	// å·²åŠ è½½å›¾åƒé«˜
 
 public:
-	T_Graph();					// T_GraphÀàÄ¬ÈÏ¹¹Ôìº¯Êı
-	T_Graph(LPTSTR fileName);	// Ê¹ÓÃÖ¸¶¨ÎÄ¼ş´´½¨T_Graph¶ÔÏó
-	virtual ~T_Graph();			// T_GraphÀàµÄÎö¹¹º¯Êı
+	T_Graph();					// T_Graphç±»é»˜è®¤æ„é€ å‡½æ•°
+	T_Graph(LPTSTR fileName);	// ä½¿ç”¨æŒ‡å®šæ–‡ä»¶åˆ›å»ºT_Graphå¯¹è±¡
+	virtual ~T_Graph();			// T_Graphç±»çš„ææ„å‡½æ•°
 
-	HBITMAP GetBmpHandle(){ return hBmp; }		// »ñµÃÒÑ¼ÓÔØÍ¼Ïñ¾ä±ú
-	int GetImageWidth(){ return ImageWidth; }	// »ñµÃÒÑ¼ÓÔØÍ¼Ïñ¿í
-	int GetImageHeight(){ return ImageHeight; }	// »ñµÃÒÑ¼ÓÔØÍ¼Ïñ¸ß
+	HBITMAP GetBmpHandle(){ return hBmp; }		// è·å¾—å·²åŠ è½½å›¾åƒå¥æŸ„
+	int GetImageWidth(){ return ImageWidth; }	// è·å¾—å·²åŠ è½½å›¾åƒå®½
+	int GetImageHeight(){ return ImageHeight; }	// è·å¾—å·²åŠ è½½å›¾åƒé«˜
 	
 public:
-	// ¼ÓÔØÍ¼Ïñ(Ö§³ÖBMP, GIF, JPEG, PNG, TIFFµÈ¸ñÊ½)
+	// åŠ è½½å›¾åƒ(æ”¯æŒBMP, GIF, JPEG, PNG, TIFFç­‰æ ¼å¼)
 	bool LoadImageFile(LPCTSTR path);				
 
 	void PaintImage(HDC hdc, int x, int y);
 	void PaintImage(HDC hdc, int x, int y, int width, int height);
 	void PaintImage(HDC hdc, int x, int y, int width, int height, BYTE alpha);
 	
-	void Destroy();	// ÊÍ·Å×ÊÔ´
+	void Destroy();	// é‡Šæ”¾èµ„æº
 public:
 	static HBITMAP CreateBlankBitmap(int width, int height, COLORREF color);
 
-	// °ÑHBITMAP¾ä±ú×ª»»ÎªBitmapÀà¶ÔÏóµÄº¯Êı
+	// æŠŠHBITMAPå¥æŸ„è½¬æ¢ä¸ºBitmapç±»å¯¹è±¡çš„å‡½æ•°
 	static Bitmap* HBITMAP_To_Bitmap(HBITMAP hbmp, HDC hdc);
 
-	// »æÖÆÔ­Ê¼Í¼ÏñµÄ¾Ö²¿ÇøÓò£¬»æÖÆÊ±¿ÉÒÔ½øĞĞËõ·Å²¢Ö¸¶¨Í¸Ã÷¶ÈºÍÍ¼ÏñµÄĞı×ª·½Ê½
-	// ²ÎÊıin_hbitmapÎªÒª²Ù×÷µÄÔ­Ê¼Î»Í¼¾ä±ú
-	// ²ÎÊıdestDCÎªÒª»æÖÆµÄÄ¿±êÉè±¸
-	// ²ÎÊıdestX¡¢destYÎª»æÖÆµÄÄ¿µÄµØ×ø±êÎ»ÖÃ
-	// ¾Ö²¿ÇøÓòÓÉ²ÎÊısrcX¡¢srcY¡¢regionWidthºÍregionHeightÖ¸¶¨
-	// ²ÎÊıratioÖ¸¶¨Ëõ·Å±ÈÂÊ£¬¸ÃÖµÎª1±£³ÖÔ­Ñù£¬Ğ¡ÓÚ1ÎªËõĞ¡£¬´óÓÚ1Îª·Å´ó
-	// ²ÎÊırotTypeÖ¸¶¨Ğı×ªÀàĞÍ£¨¸Ã²ÎÊıµÄÖµ±ØĞëÊÇTRANSFER³£Á¿ÖµÖ®Ò»£©
-	// ²ÎÊıalphaÎª»æÖÆÊ±µÄÍ¸Ã÷¶È
+	// ç»˜åˆ¶åŸå§‹å›¾åƒçš„å±€éƒ¨åŒºåŸŸï¼Œç»˜åˆ¶æ—¶å¯ä»¥è¿›è¡Œç¼©æ”¾å¹¶æŒ‡å®šé€æ˜åº¦å’Œå›¾åƒçš„æ—‹è½¬æ–¹å¼
+	// å‚æ•°in_hbitmapä¸ºè¦æ“ä½œçš„åŸå§‹ä½å›¾å¥æŸ„
+	// å‚æ•°destDCä¸ºè¦ç»˜åˆ¶çš„ç›®æ ‡è®¾å¤‡
+	// å‚æ•°destXã€destYä¸ºç»˜åˆ¶çš„ç›®çš„åœ°åæ ‡ä½ç½®
+	// å±€éƒ¨åŒºåŸŸç”±å‚æ•°srcXã€srcYã€regionWidthå’ŒregionHeightæŒ‡å®š
+	// å‚æ•°ratioæŒ‡å®šç¼©æ”¾æ¯”ç‡ï¼Œè¯¥å€¼ä¸º1ä¿æŒåŸæ ·ï¼Œå°äº1ä¸ºç¼©å°ï¼Œå¤§äº1ä¸ºæ”¾å¤§
+	// å‚æ•°rotTypeæŒ‡å®šæ—‹è½¬ç±»å‹ï¼ˆè¯¥å‚æ•°çš„å€¼å¿…é¡»æ˜¯TRANSFERå¸¸é‡å€¼ä¹‹ä¸€ï¼‰
+	// å‚æ•°alphaä¸ºç»˜åˆ¶æ—¶çš„é€æ˜åº¦
 	static void PaintRegion(HBITMAP in_hbitmap, HDC destDC, int destX, int destY, 
 		                    int srcX, int srcY, int regionWidth, int regionHeight,
 		                    float ratio, int rotType=0, BYTE alpha=255);  
 
-	// ¸ù¾İPaintRegion·â×°µÄÒ»¸ö×¨ÃÅÓÃÓÚ»æÖÆ¶¯»­Ö¡Í¼ÏñµÄº¯Êı
-	// ²ÎÊıin_hbitmapÎªÒª²Ù×÷µÄÔ­Ê¼Î»Í¼¾ä±ú
-	// ²ÎÊıdestDCÎªÒª»æÖÆµÄÄ¿±êÉè±¸
-	// ²ÎÊıdestX¡¢destYÎª»æÖÆµÄÄ¿µÄµØ×ø±êÎ»ÖÃ
-	// ²ÎÊıFrameCountÎª¶¯»­Ö¡×ÜÊı
-	// ²ÎÊıRowFramesÎª±£´æÖ¡Í¼Í¼ÏñÃ¿ĞĞÖ¡Í¼µÄÊıÁ¿
-	// ²ÎÊıwFrame¡¢hFrameÎªÖ¡¿í¡¢¸ß
-	// ²ÎÊıratioÖ¸¶¨Ëõ·Å±ÈÂÊ£¬¸ÃÖµÎª1±£³ÖÔ­Ñù£¬Ğ¡ÓÚ1ÎªËõĞ¡£¬´óÓÚ1Îª·Å´ó
-	// ²ÎÊırotTypeÖ¸¶¨Ğı×ªÀàĞÍ£¨¸Ã²ÎÊıµÄÖµ±ØĞëÊÇTRANSFER³£Á¿ÖµÖ®Ò»£©
-	// ²ÎÊıalphaÎª»æÖÆÊ±µÄÍ¸Ã÷¶È 
+	// æ ¹æ®PaintRegionå°è£…çš„ä¸€ä¸ªä¸“é—¨ç”¨äºç»˜åˆ¶åŠ¨ç”»å¸§å›¾åƒçš„å‡½æ•°
+	// å‚æ•°in_hbitmapä¸ºè¦æ“ä½œçš„åŸå§‹ä½å›¾å¥æŸ„
+	// å‚æ•°destDCä¸ºè¦ç»˜åˆ¶çš„ç›®æ ‡è®¾å¤‡
+	// å‚æ•°destXã€destYä¸ºç»˜åˆ¶çš„ç›®çš„åœ°åæ ‡ä½ç½®
+	// å‚æ•°FrameCountä¸ºåŠ¨ç”»å¸§æ€»æ•°
+	// å‚æ•°RowFramesä¸ºä¿å­˜å¸§å›¾å›¾åƒæ¯è¡Œå¸§å›¾çš„æ•°é‡
+	// å‚æ•°wFrameã€hFrameä¸ºå¸§å®½ã€é«˜
+	// å‚æ•°ratioæŒ‡å®šç¼©æ”¾æ¯”ç‡ï¼Œè¯¥å€¼ä¸º1ä¿æŒåŸæ ·ï¼Œå°äº1ä¸ºç¼©å°ï¼Œå¤§äº1ä¸ºæ”¾å¤§
+	// å‚æ•°rotTypeæŒ‡å®šæ—‹è½¬ç±»å‹ï¼ˆè¯¥å‚æ•°çš„å€¼å¿…é¡»æ˜¯TRANSFERå¸¸é‡å€¼ä¹‹ä¸€ï¼‰
+	// å‚æ•°alphaä¸ºç»˜åˆ¶æ—¶çš„é€æ˜åº¦ 
 	static void PaintFrame(HBITMAP in_hbitmap, HDC destDC, int destX, int destY, 
 		                   int FrameCount, int RowFrames, int wFrame, int hFrame, 
 		                   float ratio=1, int rotType=0, BYTE alpha=255);

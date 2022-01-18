@@ -7,7 +7,7 @@
 #include "T_Config.h"
 #include "T_GameObject.h"
 
-//µØÍ¼Êı¾İ´æ´¢Àà
+//åœ°å›¾æ•°æ®å­˜å‚¨ç±»
 
 struct Rast{
     Rast(int _graph=0,float _x=0,float offset=0):graphIndex(_graph),x(x),offset(offset){

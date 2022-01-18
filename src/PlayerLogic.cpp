@@ -36,16 +36,16 @@ void PlayerLogic::Update()
 			float tx = gameObject->transform.position.x - this->gameObject.transform.position.x;
 			float tz = gameObject->transform.position.z - this->gameObject.transform.position.z;
 			if (tx * tx + tz * tz < 4) {
-				T_Scene::activeScene->renderManager->topText = L"ÄãµÄÓÄÁé¸ĞÓ¦Æ÷ßÇßÇ×÷Ïì";
+				T_Scene::activeScene->renderManager->topText = L"ä½ çš„å¹½çµæ„Ÿåº”å™¨å’”å’”ä½œå“";
 			}
 			else {
 				if (kill <= 5)
-					T_Scene::activeScene->renderManager->topText = L"ÄãĞèÒª»÷É±ÁùÖ»ÓÄÁéÀ´¿ªÆôÆìÖÄ";
+					T_Scene::activeScene->renderManager->topText = L"ä½ éœ€è¦å‡»æ€å…­åªå¹½çµæ¥å¼€å¯æ——å¸œ";
 				else
-					T_Scene::activeScene->renderManager->topText = L"¿ìµ½ÆìÖÄÄÇÀïÈ¥";
+					T_Scene::activeScene->renderManager->topText = L"å¿«åˆ°æ——å¸œé‚£é‡Œå»";
 			}
 			if (tx * tx + tz * tz < 0.09) {
-				if (IDOK == MessageBox(NULL, L"Äã±»ÓÄÁé×¥×¡ÁË", L"ÄãÊäÁË",
+				if (IDOK == MessageBox(NULL, L"ä½ è¢«å¹½çµæŠ“ä½äº†", L"ä½ è¾“äº†",
 					MB_OKCANCEL)) {
 					exit(0);
 				}
@@ -64,7 +64,7 @@ void PlayerLogic::Update()
 				float tx = gameObject->transform.position.x - this->gameObject.transform.position.x;
 				float tz = gameObject->transform.position.z - this->gameObject.transform.position.z;
 				if (tx * tx + tz * tz <= 0.25) {
-					if (IDOK == MessageBox(NULL, L"ÄãÌÓÀëÁËÓÄÁé", L"ÄãÓ®ÁË",
+					if (IDOK == MessageBox(NULL, L"ä½ é€ƒç¦»äº†å¹½çµ", L"ä½ èµ¢äº†",
 						MB_OKCANCEL)) {
 						exit(0);
 					}

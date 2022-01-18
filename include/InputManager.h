@@ -24,15 +24,15 @@ public:
 
     InputManager();
     /// <summary>
-    /// 获取按键是否下压
+    /// 鑾峰彇鎸夐敭鏄惁涓嬪帇
     /// </summary>
-    /// <param name="keyType">按键类型(参考wParam)</param>
+    /// <param name="keyType">鎸夐敭绫诲瀷(鍙傝�僿Param)</param>
     /// <returns></returns>
     bool GetKeyDown(int keyType);
     /// <summary>
-    /// 获取按键是否弹起
+    /// 鑾峰彇鎸夐敭鏄惁寮硅捣
     /// </summary>
-    /// <param name="keyType">按键类型(参考wParam)</param>
+    /// <param name="keyType">鎸夐敭绫诲瀷(鍙傝�僿Param)</param>
     /// <returns></returns>
     bool GetKeyUp(int keyType);
     T_Vector3 GetMousePos();

@@ -5,7 +5,7 @@ class PlayerController:
 {
 public:
 	/// <summary>
-	/// 玩家行走速度
+	/// 鐜╁琛岃蛋閫熷害
 	/// </summary>
 	explicit PlayerController(T_GameObject& gameObject) :T_Component(gameObject) {};
 	const float v = 0.05;

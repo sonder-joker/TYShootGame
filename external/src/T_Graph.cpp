@@ -1,35 +1,35 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// °æÈ¨ËùÓĞ 2007-2013 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// ç‰ˆæƒæ‰€æœ‰ 2007-2013 ä¸‡ç«‹ä¸­
 // (C) 2007-2013 WanLizhong All Rights Reserved
 //*******************************************************************
 
 #include "T_Graph.h"
 #include "T_Config.h"
 
-// T_GraphÀàÄ¬ÈÏ¹¹Ôìº¯Êı
+// T_Graphç±»é»˜è®¤æ„é€ å‡½æ•°
 //
 T_Graph::T_Graph()
 {
 	hBmp = NULL;
 }
 
-// T_GraphÀà¹¹Ôìº¯Êı£¬Ê¹ÓÃÖ¸¶¨µÄÎÄ¼şÀ´´´½¨Ò»¸öHBITMAP¶ÔÏó
+// T_Graphç±»æ„é€ å‡½æ•°ï¼Œä½¿ç”¨æŒ‡å®šçš„æ–‡ä»¶æ¥åˆ›å»ºä¸€ä¸ªHBITMAPå¯¹è±¡
 T_Graph::T_Graph(LPTSTR fileName)
 {
 	LoadImageFile(fileName);
 }
 
-// T_GraphÀàÎö¹¹º¯Êı
+// T_Graphç±»ææ„å‡½æ•°
 T_Graph::~T_Graph()
 {
 	
 }
 
-// T_GraphÀàÊÍ·Å×ÊÔ´µÄ·½·¨
+// T_Graphç±»é‡Šæ”¾èµ„æºçš„æ–¹æ³•
 void T_Graph::Destroy()
 {
 	GdiFlush();
@@ -83,14 +83,14 @@ HBITMAP T_Graph::CreateBlankBitmap(int width, int height, COLORREF color)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-// ´ÓµÚÒ»²ÎÊıÖ¸¶¨µÄHBITMAP¿½±´Êı¾İ´´½¨Ò»¸öBitmapÀàµÄÖ¸Õë¶ÔÏó
+// ä»ç¬¬ä¸€å‚æ•°æŒ‡å®šçš„HBITMAPæ‹·è´æ•°æ®åˆ›å»ºä¸€ä¸ªBitmapç±»çš„æŒ‡é’ˆå¯¹è±¡
 ////////////////////////////////////////////////////////////////////////////////////
 Bitmap* T_Graph::HBITMAP_To_Bitmap(HBITMAP hbmp, HDC hdc)
 {
 	BITMAP bmp;
 	int width, height;
 
-	// ¸ù¾İÎ»Í¼¾ä±ú»ñÈ¡BITMAP½á¹¹Ìå¶ÔÏóµÄÊı¾İ
+	// æ ¹æ®ä½å›¾å¥æŸ„è·å–BITMAPç»“æ„ä½“å¯¹è±¡çš„æ•°æ®
 	memset((void*)&bmp, 0, sizeof(BITMAP));
 	GetObject(hbmp, sizeof(BITMAP), (void*)&bmp);
 	width = bmp.bmWidth;
@@ -99,27 +99,27 @@ Bitmap* T_Graph::HBITMAP_To_Bitmap(HBITMAP hbmp, HDC hdc)
 
 	if(width<=0 && height<=0) return NULL;
 
-	// ¸ù¾İÎ»Í¼¿í¸ßĞÂ½¨Ò»¸öPixelFormat32bppPARGB¸ñÊ½µÄBitmap¶ÔÏó
+	// æ ¹æ®ä½å›¾å®½é«˜æ–°å»ºä¸€ä¸ªPixelFormat32bppPARGBæ ¼å¼çš„Bitmapå¯¹è±¡
 	Bitmap* BmpCpy = new Bitmap(width, height, PixelFormat32bppPARGB);
 
-	// ²ÉÓÃLockBitsº¯ÊıÎªÎ»Í¼ÏñËØÊı¾İ¿½±´×¼±¸ÄÚ´æ»º³åÇø
+	// é‡‡ç”¨LockBitså‡½æ•°ä¸ºä½å›¾åƒç´ æ•°æ®æ‹·è´å‡†å¤‡å†…å­˜ç¼“å†²åŒº
 	BitmapData bmpData;
 	Rect rect(0, 0, width, height);
 	BmpCpy->LockBits(&rect, ImageLockModeWrite, PixelFormat32bppPARGB, &bmpData);
 
-	// ¼ÆËã³öÎ»Í¼Ã¿ĞĞÏñËØÊı£¬²¢½«Ö¸ÕëÖ¸ÏòÊ×ĞĞ
-	// ¶ÔÓÚRGBÍ¼£¬Ò»¸öÏñËØÕ¼24¸öbit£¬¼´3¸ö×Ö½Ú±íÊ¾Ò»¸öÏñËØ
-	// ´Ë´¦´¦ÀíARGBÄ£Ê½µÄÍ¼£¬Ò»¸öÏñËØÕ¼32¸öbit£¬¼´4¸ö×Ö½Ú±íÊ¾Ò»¸öÏñËØ
+	// è®¡ç®—å‡ºä½å›¾æ¯è¡Œåƒç´ æ•°ï¼Œå¹¶å°†æŒ‡é’ˆæŒ‡å‘é¦–è¡Œ
+	// å¯¹äºRGBå›¾ï¼Œä¸€ä¸ªåƒç´ å 24ä¸ªbitï¼Œå³3ä¸ªå­—èŠ‚è¡¨ç¤ºä¸€ä¸ªåƒç´ 
+	// æ­¤å¤„å¤„ç†ARGBæ¨¡å¼çš„å›¾ï¼Œä¸€ä¸ªåƒç´ å 32ä¸ªbitï¼Œå³4ä¸ªå­—èŠ‚è¡¨ç¤ºä¸€ä¸ªåƒç´ 
 	int lineSize = width * 4;
 	byte* cpyBytes = (byte*)(bmpData.Scan0);
-	// °´ÕÕÎ»Í¼µÄ¸ßÖğĞĞ¿½±´ÏñËØÊı¾İÖÁ»º³åÇø
+	// æŒ‰ç…§ä½å›¾çš„é«˜é€è¡Œæ‹·è´åƒç´ æ•°æ®è‡³ç¼“å†²åŒº
 	for (int y = 0; y < height; y++)
 	{
 		memcpy((y * lineSize)+cpyBytes, 
 			((height - y -1) * lineSize)+bmpBytes, 
 			lineSize);
 	}
-	// ½âËøÄÚ´æ»º³åÇø
+	// è§£é”å†…å­˜ç¼“å†²åŒº
 	BmpCpy->UnlockBits(&bmpData);
 
 	return BmpCpy;
@@ -128,40 +128,40 @@ Bitmap* T_Graph::HBITMAP_To_Bitmap(HBITMAP hbmp, HDC hdc)
 
 void T_Graph::PaintImage(HDC hdc, int x, int y)
 {
-	//´´½¨Ö¡Í¼µÄÄÚ´æÉè±¸
+	//åˆ›å»ºå¸§å›¾çš„å†…å­˜è®¾å¤‡
 	HDC memDC = CreateCompatibleDC(hdc);
-	//½«¿Õ°×µÄÖ¡Í¼Ñ¡½øÄÚ´æÉè±¸
+	//å°†ç©ºç™½çš„å¸§å›¾é€‰è¿›å†…å­˜è®¾å¤‡
 	HBITMAP OldFrameBmp = (HBITMAP)SelectObject(memDC, hBmp);
-	//ÒÔÏÂÊ¹ÓÃGDIµÄBitBlt»æÖÆ,ÓÉÓÚÖ±½ÓÄÚ´æ¸´ÖÆ,ËÙ¶È½Ï¿ì
+	//ä»¥ä¸‹ä½¿ç”¨GDIçš„BitBltç»˜åˆ¶,ç”±äºç›´æ¥å†…å­˜å¤åˆ¶,é€Ÿåº¦è¾ƒå¿«
 	BitBlt(hdc, x, y, ImageWidth, ImageHeight, memDC, 0, 0, SRCCOPY);
-	//»¹Ô­£ºÊ¹ÓÃÔ­À´¶ÔÏóÌæ»»ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	//è¿˜åŸï¼šä½¿ç”¨åŸæ¥å¯¹è±¡æ›¿æ¢å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(memDC, OldFrameBmp);
-	DeleteDC(memDC);//É¾³ıÄÚ´æÉè±¸
-	DeleteObject(OldFrameBmp);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteDC(memDC);//åˆ é™¤å†…å­˜è®¾å¤‡
+	DeleteObject(OldFrameBmp);//åˆ é™¤ä½å›¾å¯¹è±¡
 }
 
 void T_Graph::PaintImage(HDC hdc, int x, int y, int width, int height)
 {
-	//´´½¨È«Í¼µÄÄÚ´æÉè±¸
+	//åˆ›å»ºå…¨å›¾çš„å†…å­˜è®¾å¤‡
 	HDC memDC = CreateCompatibleDC(hdc);
-	//½«Ô´Í¼Ñ¡½øÄÚ´æÉè±¸ÖĞ
+	//å°†æºå›¾é€‰è¿›å†…å­˜è®¾å¤‡ä¸­
 	HBITMAP hOldBitmap = (HBITMAP)SelectObject(memDC, hBmp);
 	SetStretchBltMode(hdc, COLORONCOLOR);
 	StretchBlt(hdc, x, y, width, height, 
 		       memDC, 0, 0, ImageWidth, ImageHeight, 
 		       SRCCOPY);
 
-	//Ê¹ÓÃÔ­À´¶ÔÏóÌæ»»È«Í¼ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	//ä½¿ç”¨åŸæ¥å¯¹è±¡æ›¿æ¢å…¨å›¾å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(memDC, hOldBitmap);
-	DeleteDC(memDC);//É¾³ıÈ«Í¼ÄÚ´æÉè±¸
-	DeleteObject(hOldBitmap);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteDC(memDC);//åˆ é™¤å…¨å›¾å†…å­˜è®¾å¤‡
+	DeleteObject(hOldBitmap);//åˆ é™¤ä½å›¾å¯¹è±¡
 }
 
 void T_Graph::PaintImage(HDC hdc, int x, int y, int width, int height, BYTE alpha)
 {
-	//´´½¨È«Í¼µÄÄÚ´æÉè±¸
+	//åˆ›å»ºå…¨å›¾çš„å†…å­˜è®¾å¤‡
 	HDC memDC = CreateCompatibleDC(hdc);
-	//½«Ô´Í¼Ñ¡½øÄÚ´æÉè±¸ÖĞ
+	//å°†æºå›¾é€‰è¿›å†…å­˜è®¾å¤‡ä¸­
 	HBITMAP hOldBitmap = (HBITMAP)SelectObject(memDC, hBmp);
 
 	BLENDFUNCTION dc_bf;
@@ -179,13 +179,13 @@ void T_Graph::PaintImage(HDC hdc, int x, int y, int width, int height, BYTE alph
 	//			 memDC, 0, 0, ImageWidth, ImageHeight, 
 	//			 SRCCOPY);
 
-	//Ê¹ÓÃÔ­À´¶ÔÏóÌæ»»È«Í¼ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	//ä½¿ç”¨åŸæ¥å¯¹è±¡æ›¿æ¢å…¨å›¾å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(memDC, hOldBitmap);
-	DeleteDC(memDC);//É¾³ıÈ«Í¼ÄÚ´æÉè±¸
-	DeleteObject(hOldBitmap);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteDC(memDC);//åˆ é™¤å…¨å›¾å†…å­˜è®¾å¤‡
+	DeleteObject(hOldBitmap);//åˆ é™¤ä½å›¾å¯¹è±¡
 }
 
-//rotType:Ğı×ªÀàĞÍ
+//rotType:æ—‹è½¬ç±»å‹
 void T_Graph::PaintRegion(HBITMAP in_hbitmap, HDC destDC, int destX, int destY, 
 						  int srcX, int srcY, int regionWidth, int regionHeight,
 						  float ratio, int rotType, BYTE alpha)  
@@ -222,21 +222,21 @@ void T_Graph::PaintRegion(HBITMAP in_hbitmap, HDC destDC, int destX, int destY,
 
 	Bitmap* nowFrameBmp =HBITMAP_To_Bitmap(hbitmap, destDC);
 
-	//»¹Ô­£ºÊ¹ÓÃÔ­À´¶ÔÏóÌæ»»ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	//è¿˜åŸï¼šä½¿ç”¨åŸæ¥å¯¹è±¡æ›¿æ¢å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(frameDC, OldFrameBmp);
-	DeleteDC(frameDC);//É¾³ıÄÚ´æÉè±¸
-	DeleteObject(OldFrameBmp);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteDC(frameDC);//åˆ é™¤å†…å­˜è®¾å¤‡
+	DeleteObject(OldFrameBmp);//åˆ é™¤ä½å›¾å¯¹è±¡
 	OldFrameBmp = NULL;
-	DeleteObject(hbitmap);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteObject(hbitmap);//åˆ é™¤ä½å›¾å¯¹è±¡
 	hbitmap = NULL;
 
-	//»¹Ô­£ºÊ¹ÓÃÔ­À´¶ÔÏóÌæ»»ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	//è¿˜åŸï¼šä½¿ç”¨åŸæ¥å¯¹è±¡æ›¿æ¢å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(memDC, OldMemBmp);
-	DeleteDC(memDC);//É¾³ıÄÚ´æÉè±¸
-	DeleteObject(OldMemBmp);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteDC(memDC);//åˆ é™¤å†…å­˜è®¾å¤‡
+	DeleteObject(OldMemBmp);//åˆ é™¤ä½å›¾å¯¹è±¡
 	OldMemBmp = NULL;
 
-	//Ğı×ªÖ¡Í¼
+	//æ—‹è½¬å¸§å›¾
 	switch(rotType)
 	{
 	case TRANS_NONE:
@@ -311,15 +311,15 @@ void T_Graph::PaintRegion(HBITMAP in_hbitmap, HDC destDC, int destX, int destY,
 	AlphaBlend(destDC, destX, destY, width, height, 
 		       bufDC, 0, 0, width, height, buf_bf);
 
-	//»¹Ô­£ºÊ¹ÓÃÔ­À´¶ÔÏóÌæ»»ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	//è¿˜åŸï¼šä½¿ç”¨åŸæ¥å¯¹è±¡æ›¿æ¢å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(bufDC, OldbufBmp);
-	DeleteDC(bufDC);//É¾³ıÄÚ´æÉè±¸
-	DeleteObject(OldbufBmp);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteDC(bufDC);//åˆ é™¤å†…å­˜è®¾å¤‡
+	DeleteObject(OldbufBmp);//åˆ é™¤ä½å›¾å¯¹è±¡
 	OldbufBmp = NULL;
-	DeleteObject(hbmp);//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteObject(hbmp);//åˆ é™¤ä½å›¾å¯¹è±¡
 	hbmp = NULL;
-	DeleteObject(nowFrameBmp);//É¾³ıÎ»Í¼¶ÔÏó
-	delete nowFrameBmp;//É¾³ıÎ»Í¼¶ÔÏó
+	DeleteObject(nowFrameBmp);//åˆ é™¤ä½å›¾å¯¹è±¡
+	delete nowFrameBmp;//åˆ é™¤ä½å›¾å¯¹è±¡
 	nowFrameBmp = NULL;
 }
 
@@ -339,7 +339,7 @@ void T_Graph::PaintText(HDC hdc, RectF fontRect, LPCTSTR text, REAL fontSize,
 						LPCTSTR fontName, Color fontColor, FontStyle style, 
 						StringAlignment align)
 {
-	//Ê¹ÓÃGDI·½·¨½øĞĞ»æÖÆ
+	//ä½¿ç”¨GDIæ–¹æ³•è¿›è¡Œç»˜åˆ¶
 	Graphics graph(hdc);
 	FontFamily fontFamily(fontName);
 	Font font(&fontFamily, fontSize, style, UnitPoint);
@@ -380,19 +380,19 @@ void T_Graph::PaintBlank(HDC hdc, int x, int y, int width, int height, COLORREF 
 	frame_bf.AlphaFormat = 0;
 	AlphaBlend(hdc, x, y, width, height, memdc, 0, 0, width, height, frame_bf);
 	
-	// »Ö¸´ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	// æ¢å¤å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(memdc, OldBmp);
-	// É¾³ıÄÚ´æÉè±¸
+	// åˆ é™¤å†…å­˜è®¾å¤‡
 	DeleteDC(memdc);
-	// É¾³ıÎ»Í¼¶ÔÏó
+	// åˆ é™¤ä½å›¾å¯¹è±¡
 	DeleteObject(OldBmp);
-	// ÊÍ·Å¾ä±ú
+	// é‡Šæ”¾å¥æŸ„
 	OldBmp = NULL;
-	// É¾³ıÎ»Í¼¶ÔÏó
+	// åˆ é™¤ä½å›¾å¯¹è±¡
 	DeleteObject(hbitmap);
-	// ÊÍ·Å¾ä±ú
+	// é‡Šæ”¾å¥æŸ„
 	hbitmap = NULL;
-	// É¾³ı±ÊË¢
+	// åˆ é™¤ç¬”åˆ·
 	DeleteObject(hBrush);
 }
 
@@ -405,14 +405,14 @@ void T_Graph::PaintBlank(HBITMAP hbmp, int width, int height, COLORREF crColor)
 	RECT rcBitmap = {0, 0, width, height};
 	FillRect(memdc, &rcBitmap, hBrush);
 	
-	// »Ö¸´ÄÚ´æÉè±¸ÖĞµÄÎ»Í¼¶ÔÏó
+	// æ¢å¤å†…å­˜è®¾å¤‡ä¸­çš„ä½å›¾å¯¹è±¡
 	SelectObject(memdc, OldBmp);
-	// É¾³ıÄÚ´æÉè±¸
+	// åˆ é™¤å†…å­˜è®¾å¤‡
 	DeleteDC(memdc);
-	// É¾³ıÎ»Í¼¶ÔÏó
+	// åˆ é™¤ä½å›¾å¯¹è±¡
 	DeleteObject(OldBmp);
-	// ÊÍ·Å¾ä±ú
+	// é‡Šæ”¾å¥æŸ„
 	OldBmp = NULL;
-	// É¾³ı±ÊË¢
+	// åˆ é™¤ç¬”åˆ·
 	DeleteObject(hBrush);
 }

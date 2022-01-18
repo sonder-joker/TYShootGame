@@ -1,10 +1,10 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// ¸üĞÂ: 2020-12-20
-// °æÈ¨ËùÓĞ 2007-2021 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// æ›´æ–°: 2020-12-20
+// ç‰ˆæƒæ‰€æœ‰ 2007-2021 ä¸‡ç«‹ä¸­
 // (C) 2007-2021 WanLizhong All Rights Reserved
 //*******************************************************************
 
@@ -15,91 +15,91 @@
 class T_Engine
 {
 public:
-	static HWND m_hWnd;					// ´°¿Ú¾ä±ú
-	static HINSTANCE m_hInstance;		// ÊµÀı¾ä±ú
-	static T_Engine* pEngine;			// ±¾Àà¾²Ì¬Ö¸Õë(±ØĞëÖ¸Ïò±¾Àà¼Ì³ĞÀà)
+	static HWND m_hWnd;					// çª—å£å¥æŸ„
+	static HINSTANCE m_hInstance;		// å®ä¾‹å¥æŸ„
+	static T_Engine* pEngine;			// æœ¬ç±»é™æ€æŒ‡é’ˆ(å¿…é¡»æŒ‡å‘æœ¬ç±»ç»§æ‰¿ç±»)
 
 public:
-	ULONG_PTR ptrGdiplusToken;			// ¶ÔGDI+µÄÒıÓÃ
+	ULONG_PTR ptrGdiplusToken;			// å¯¹GDI+çš„å¼•ç”¨
 
-	LPCTSTR wndClass;					// ´°¿ÚÀàÃû³Æ
-	LPCTSTR wndTitle;					// ´°¿Ú±êÌâ	
-	int wndWidth, wndHeight;			// ´°¿Ú¿í¸ß
-	int scrnWidth, scrnHeight;			// ÆÁÄ»·Ö±æÂÊ¿í¡¢¸ß
-	WORD wIcon, wSmIcon;				// ³ÌĞò´óÍ¼±ê¼°Ğ¡Í¼±ê
-	BOOL m_bFullScreen;					// ÊÇ·ñÈ«ÆÁÏÔÊ¾±êÖ¾;
+	LPCTSTR wndClass;					// çª—å£ç±»åç§°
+	LPCTSTR wndTitle;					// çª—å£æ ‡é¢˜	
+	int wndWidth, wndHeight;			// çª—å£å®½é«˜
+	int scrnWidth, scrnHeight;			// å±å¹•åˆ†è¾¨ç‡å®½ã€é«˜
+	WORD wIcon, wSmIcon;				// ç¨‹åºå¤§å›¾æ ‡åŠå°å›¾æ ‡
+	BOOL m_bFullScreen;					// æ˜¯å¦å…¨å±æ˜¾ç¤ºæ ‡å¿—;
 
-	RECT m_rcOld;						// µ±Ç°´°¿Ú³ß´ç
-	LONG style;							// ´°¿Ú»ù±¾·ç¸ñ
-	LONG ex_style;						// ´°¿ÚÀ©Õ¹·ç¸ñ
-	T_Display* p_disp;					// ¶¨ÒåÏÔÊ¾ÀàÖ¸Õë
+	RECT m_rcOld;						// å½“å‰çª—å£å°ºå¯¸
+	LONG style;							// çª—å£åŸºæœ¬é£æ ¼
+	LONG ex_style;						// çª—å£æ‰©å±•é£æ ¼
+	T_Display* p_disp;					// å®šä¹‰æ˜¾ç¤ºç±»æŒ‡é’ˆ
 
-	int IntervalTime;					// ÓÎÏ·Ö¡Ë¢ĞÂ¼ä¸ôÊ±¼ä
-	BOOL isAsleep;						// ´°¿ÚÊÇ·ñ´¦ÓÚ·Ç½¹µã×´Ì¬
+	int IntervalTime;					// æ¸¸æˆå¸§åˆ·æ–°é—´éš”æ—¶é—´
+	BOOL isAsleep;						// çª—å£æ˜¯å¦å¤„äºéç„¦ç‚¹çŠ¶æ€
 
-	HBITMAP bufferBitmap;				// ÄÚ´æ»º³åÎ»Í¼
-	HDC bufferDC;						// ÄÚ´æ»º³åÉè±¸
+	HBITMAP bufferBitmap;				// å†…å­˜ç¼“å†²ä½å›¾
+	HDC bufferDC;						// å†…å­˜ç¼“å†²è®¾å¤‡
 
-	bool keys[256];						// ¼ÇÂ¼¼üÅÌ×´Ì¬µÄÊı×é
-	int GameState;						// ÓÎÏ·×´Ì¬(ÎªGAME_STATE³£Á¿Öµ)
+	bool keys[256];						// è®°å½•é”®ç›˜çŠ¶æ€çš„æ•°ç»„
+	int GameState;						// æ¸¸æˆçŠ¶æ€(ä¸ºGAME_STATEå¸¸é‡å€¼)
 
 	BOOL quickRender;
 
 public:
-	// ¹¹Ôìº¯Êı
+	// æ„é€ å‡½æ•°
 	T_Engine(HINSTANCE hInstance, LPCTSTR szWindowClass, LPCTSTR szTitle, 
 		     WORD Icon = NULL, WORD SmIcon = NULL, 
 		     int iWidth = WIN_WIDTH, int iHeight = WIN_HEIGHT,
 		     COLORREF bkColor = WIN_BKCLR);
-	// Îö¹¹º¯Êı
+	// ææ„å‡½æ•°
 	virtual ~T_Engine();
-	// »ñÈ¡ÓÎÏ·Ö¡Ë¢ĞÂ¼ä¸ôÊ±¼ä
+	// è·å–æ¸¸æˆå¸§åˆ·æ–°é—´éš”æ—¶é—´
 	int GetInterval() { return IntervalTime; }
-	// ÉèÖÃÓÎÏ·Ö¡Ë¢ĞÂ¼ä¸ôÊ±¼ä
+	// è®¾ç½®æ¸¸æˆå¸§åˆ·æ–°é—´éš”æ—¶é—´
 	void SetFrame(int iTime) { IntervalTime = 1000 / iTime; }
-	// »ñÈ¡´°¿ÚÊÇ·ñÎª½¹µã×´Ì¬
+	// è·å–çª—å£æ˜¯å¦ä¸ºç„¦ç‚¹çŠ¶æ€
 	BOOL GetSleep() { return isAsleep; }
-	// ÉèÖÃ´°¿ÚÊÇ·ñÎª½¹µã×´Ì¬
+	// è®¾ç½®çª—å£æ˜¯å¦ä¸ºç„¦ç‚¹çŠ¶æ€
 	void SetSleep(BOOL asleep) { isAsleep = asleep; }
-	// ÉèÖÃ´°¿ÚÊÇ·ñÈ«ÆÁÄ»ÏÔÊ¾
+	// è®¾ç½®çª—å£æ˜¯å¦å…¨å±å¹•æ˜¾ç¤º
 	void SetFullScreen(BOOL isFull){ m_bFullScreen = isFull; }
 
 
-	// »ñÈ¡´°¿ÚÊÇ·ñÎª½¹µã×´Ì¬
+	// è·å–çª—å£æ˜¯å¦ä¸ºç„¦ç‚¹çŠ¶æ€
 	BOOL GetQuickRender() { return quickRender; }
-	// ÉèÖÃ´°¿ÚÊÇ·ñÎª½¹µã×´Ì¬
+	// è®¾ç½®çª—å£æ˜¯å¦ä¸ºç„¦ç‚¹çŠ¶æ€
 	void SetQuickRender(BOOL quick) { quickRender = quick; }
 
-	// »ñÈ¡µ±Ç°µÄ°´¼ü×´Ì¬
+	// è·å–å½“å‰çš„æŒ‰é”®çŠ¶æ€
 	bool CheckKey(WPARAM wParam){ return keys[wParam]; }
-	// ¸½¼Ó°´¼üĞĞÎª´¦Àí
+	// é™„åŠ æŒ‰é”®è¡Œä¸ºå¤„ç†
 	void SubKeyAction(WPARAM wParam);
 
-	void SetBackColor(COLORREF bkcolor);// ¸üĞÂ: 2019-10-11(¸Ä±ä»º³åÎ»Í¼±³¾°É«)
+	void SetBackColor(COLORREF bkcolor);// æ›´æ–°: 2019-10-11(æ”¹å˜ç¼“å†²ä½å›¾èƒŒæ™¯è‰²)
 	HDC GetBufferDC(){ return bufferDC; }
 
-	// ±»ÏµÍ³×Ô¶¯µ÷ÓÃµÄ»Øµ÷º¯Êı
+	// è¢«ç³»ç»Ÿè‡ªåŠ¨è°ƒç”¨çš„å›è°ƒå‡½æ•°
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, 
 		                         WPARAM wParam, LPARAM lParam );
-	// ³õÊ¼»¯´¦Àí
+	// åˆå§‹åŒ–å¤„ç†
 	BOOL GameWinInit();
-	// ÏûÏ¢´¦Àíº¯Êı£¬½«±»»Øµ÷º¯Êıµ÷ÓÃ
+	// æ¶ˆæ¯å¤„ç†å‡½æ•°ï¼Œå°†è¢«å›è°ƒå‡½æ•°è°ƒç”¨
 	LRESULT GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-	// ÒıÇæÆô¶¯º¯Êı
+	// å¼•æ“å¯åŠ¨å‡½æ•°
 	void StartEngine();
 
 public:
-	// ´¿º¯ÊıÉùÃ÷(¾ßÌåÓÎÏ·ÒªÖØÔØÕâĞ©º¯Êı²¢Ôö¼ÓÓÎÏ·¹¦ÄÜ´úÂë)
-	// ÓÎÏ·³õÊ¼»¯
+	// çº¯å‡½æ•°å£°æ˜(å…·ä½“æ¸¸æˆè¦é‡è½½è¿™äº›å‡½æ•°å¹¶å¢åŠ æ¸¸æˆåŠŸèƒ½ä»£ç )
+	// æ¸¸æˆåˆå§‹åŒ–
 	virtual void GameInit()=0;		
-	// ÓÎÏ·Âß¼­´¦Àí
+	// æ¸¸æˆé€»è¾‘å¤„ç†
 	virtual void GameLogic()=0;		
-	// ÓÎÏ·½áÊø´¦Àí
+	// æ¸¸æˆç»“æŸå¤„ç†
 	virtual void GameEnd()=0;
-	// ¸ù¾İGAME_STATEÖµÏÔÊ¾ÓÎÏ·½çÃæ
+	// æ ¹æ®GAME_STATEå€¼æ˜¾ç¤ºæ¸¸æˆç•Œé¢
 	virtual void GamePaint(HDC hdc)=0;
-	// ¸ù¾İKM_ACTIONÖµ´¦Àí°´¼üĞĞÎª
+	// æ ¹æ®KM_ACTIONå€¼å¤„ç†æŒ‰é”®è¡Œä¸º
 	virtual void GameKeyAction(int KeyType,int ActionType=KEY_SYS_NONE)=0;
-	// ¸ù¾İKM_ACTIONÖµ´¦ÀíÊó±êĞĞÎª
+	// æ ¹æ®KM_ACTIONå€¼å¤„ç†é¼ æ ‡è¡Œä¸º
 	virtual void GameMouseAction(int x, int y, int ActionType)=0;	
 };

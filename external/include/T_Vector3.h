@@ -13,9 +13,9 @@ public:
 	T_Vector3(float x1, float y1, float z1) { val[0] = x1, val[1] = y1, val[2] = z1; };
 	T_Vector3(const T_Vector3& v);
 
-	T_Vector3 operator =(const T_Vector3& v); //¸³ÖµÔËËã·ûÖØÔØ
+	T_Vector3 operator =(const T_Vector3& v); //èµ‹å€¼è¿ç®—ç¬¦é‡è½½
 
-	// +-*/²»Í¬µÄÖØÔØ·½Ê½
+	// +-*/ä¸åŒçš„é‡è½½æ–¹å¼
 	T_Vector3 operator +(const T_Vector3& v);
 	T_Vector3 operator -(const T_Vector3& v);
 	T_Vector3 operator *(const T_Vector3& v);
@@ -30,11 +30,11 @@ public:
 
 	float& operator[](int t);
 
-	float dot(const T_Vector3& v1, const T_Vector3& v2);      //2¸öÏòÁ¿µÄÊıÁ¿»ı
-	T_Vector3 Cross(const T_Vector3& v1, const T_Vector3& v2); //2¸öÏòÁ¿µÄÏòÁ¿»ı
-	float length();     //ÇóÏòÁ¿µÄ³¤¶È
-	T_Vector3 Normalize();//µ¥Î»»¯ÏòÁ¿
-	T_Vector3 Scale(float n);//ÏòÁ¿°´±ÈÀıËõ·Å 
+	float dot(const T_Vector3& v1, const T_Vector3& v2);      //2ä¸ªå‘é‡çš„æ•°é‡ç§¯
+	T_Vector3 Cross(const T_Vector3& v1, const T_Vector3& v2); //2ä¸ªå‘é‡çš„å‘é‡ç§¯
+	float length();     //æ±‚å‘é‡çš„é•¿åº¦
+	T_Vector3 Normalize();//å•ä½åŒ–å‘é‡
+	T_Vector3 Scale(float n);//å‘é‡æŒ‰æ¯”ä¾‹ç¼©æ”¾ 
 	virtual ~T_Vector3(void);
 
 	float val[3];

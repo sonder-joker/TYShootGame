@@ -1,10 +1,10 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// ¸üĞÂ: 2020-12-20
-// °æÈ¨ËùÓĞ 2007-2021 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// æ›´æ–°: 2020-12-20
+// ç‰ˆæƒæ‰€æœ‰ 2007-2021 ä¸‡ç«‹ä¸­
 // (C) 2007-2021 WanLizhong All Rights Reserved
 //*******************************************************************
 
@@ -17,11 +17,11 @@ public:
 	T_Display();
 	~T_Display();
 
-	void SaveMode();						// ±£´æµ±Ç°·Ö±æÂÊ
-	void ResetMode();						// »Ö¸´ÒÑ±£´æµÄ·Ö±æÂÊ
-	bool ChangeMode(int width, int height);	// ¸Ä±ä·Ö±æÂÊ
+	void SaveMode();						// ä¿å­˜å½“å‰åˆ†è¾¨ç‡
+	void ResetMode();						// æ¢å¤å·²ä¿å­˜çš„åˆ†è¾¨ç‡
+	bool ChangeMode(int width, int height);	// æ”¹å˜åˆ†è¾¨ç‡
 
 private:
-	DEVMODE	devmode_saved;					// ±£´æµÄµ±Ç°·Ö±æÂÊ
-	bool mode_changed;						// ·Ö±æÂÊÊÇ·ñ¸Ä±ä
+	DEVMODE	devmode_saved;					// ä¿å­˜çš„å½“å‰åˆ†è¾¨ç‡
+	bool mode_changed;						// åˆ†è¾¨ç‡æ˜¯å¦æ”¹å˜
 } ;

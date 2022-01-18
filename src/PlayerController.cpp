@@ -16,7 +16,7 @@ void PlayerController::Update()
 	else if (InputManager::GetInstance().GetKeyDown('A')) {
 		gameObject.transform.rotation.x -= 0.05;
 	}
-    //Ã»ÓĞÒÆ¶¯£¬ÌáÇ°Ìø³ö
+    //æ²¡æœ‰ç§»åŠ¨ï¼Œæå‰è·³å‡º
 
     if(move.z==0) return;
     float xmove = move.z * v * cosf(gameObject.transform.rotation.x);

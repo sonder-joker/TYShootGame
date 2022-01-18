@@ -94,7 +94,7 @@ void T_Quaternion<T>::inverse()
     catch (std::exception a) {
         std::cerr << a.what() << std::endl;
     }
-    //将模为零的情况做异常抛出
+    //灏嗘ā涓洪浂鐨勬儏鍐靛仛寮傚父鎶涘嚭
 }
 
 template<class T>

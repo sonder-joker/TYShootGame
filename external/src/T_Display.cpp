@@ -1,28 +1,28 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// ¸üĞÂ: 2020-12-20
-// °æÈ¨ËùÓĞ 2007-2021 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// æ›´æ–°: 2020-12-20
+// ç‰ˆæƒæ‰€æœ‰ 2007-2021 ä¸‡ç«‹ä¸­
 // (C) 2007-2021 WanLizhong All Rights Reserved
 //*******************************************************************
 
 #include "T_Display.h"
 
-//¹¹Ôìº¯Êı 
+//æ„é€ å‡½æ•° 
 T_Display::T_Display():mode_changed(false)
 {
 	SaveMode();
 }
 
-//Îö¹¹º¯Êı
+//ææ„å‡½æ•°
 T_Display::~T_Display()
 {
 	ResetMode();
 }
 
-// ´æ´¢ÏÖÔÚµÄÏÔÊ¾Ä£Ê½
+// å­˜å‚¨ç°åœ¨çš„æ˜¾ç¤ºæ¨¡å¼
 void T_Display::SaveMode()
 {
 	ZeroMemory(&devmode_saved, sizeof(devmode_saved));
@@ -30,7 +30,7 @@ void T_Display::SaveMode()
 	EnumDisplaySettings(NULL, ENUM_CURRENT_SETTINGS, &devmode_saved);
 }
 
-// »¹Ô­³ÉÖ®Ç°´æ´¢µÄÏÔÊ¾Ä£Ê½
+// è¿˜åŸæˆä¹‹å‰å­˜å‚¨çš„æ˜¾ç¤ºæ¨¡å¼
 void T_Display::ResetMode()
 {
 	if (mode_changed) 
@@ -40,7 +40,7 @@ void T_Display::ResetMode()
 	}
 }
 
-// ¸ü¸ÄÏÔÊ¾Ä£Ê½
+// æ›´æ”¹æ˜¾ç¤ºæ¨¡å¼
 bool T_Display::ChangeMode(int width, int height)
 {
 	DEVMODE	devmode;

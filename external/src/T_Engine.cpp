@@ -1,27 +1,27 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// ¸üĞÂ: 2020-12-20
-// °æÈ¨ËùÓĞ 2007-2021 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// æ›´æ–°: 2020-12-20
+// ç‰ˆæƒæ‰€æœ‰ 2007-2021 ä¸‡ç«‹ä¸­
 // (C) 2007-2021 WanLizhong All Rights Reserved
 //*******************************************************************
 
 #include "T_Engine.h"
 
-// ³õÊ¼»¯ÀàµÄ¾²Ì¬±äÁ¿
-HWND T_Engine::m_hWnd = NULL;				// ´°¿Ú¾ä±ú
-HINSTANCE T_Engine::m_hInstance = NULL;		// ÊµÀı¾ä±ú
-T_Engine* T_Engine::pEngine = NULL;			// ÒıÇæÀàÖ¸Õë
+// åˆå§‹åŒ–ç±»çš„é™æ€å˜é‡
+HWND T_Engine::m_hWnd = NULL;				// çª—å£å¥æŸ„
+HINSTANCE T_Engine::m_hInstance = NULL;		// å®ä¾‹å¥æŸ„
+T_Engine* T_Engine::pEngine = NULL;			// å¼•æ“ç±»æŒ‡é’ˆ
 
-// ¹¹Ôìº¯Êı
+// æ„é€ å‡½æ•°
 T_Engine::T_Engine(HINSTANCE hInstance, LPCTSTR szWindowClass, LPCTSTR szTitle, 
 				               WORD Icon, WORD SmIcon, int iWidth, int iHeight, COLORREF bkColor)
 {
 	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 	Gdiplus::GdiplusStartup(&ptrGdiplusToken, &gdiplusStartupInput, NULL);
-	// ĞŞ¸Ä¿ìËÙäÖÈ¾
+	// ä¿®æ”¹å¿«é€Ÿæ¸²æŸ“
 	quickRender = false;
 
 	pEngine = this;
@@ -41,12 +41,12 @@ T_Engine::T_Engine(HINSTANCE hInstance, LPCTSTR szWindowClass, LPCTSTR szTitle,
 		keys[i] = false;
 	}
 
-	//´´½¨ÄÚ´æ»º³åÉè±¸¼°ÄÚ´æ»º³åÎ»Í¼
+	//åˆ›å»ºå†…å­˜ç¼“å†²è®¾å¤‡åŠå†…å­˜ç¼“å†²ä½å›¾
 	bufferDC = CreateCompatibleDC(GetDC(m_hWnd));
 	bufferBitmap = CreateCompatibleBitmap(GetDC(m_hWnd), wndWidth, wndHeight);
 	SelectObject(bufferDC, bufferBitmap);
 
-	// Ìî³ä´°¿Ú±³¾°É«(¸üĞÂ: 2019-09-28)
+	// å¡«å……çª—å£èƒŒæ™¯è‰²(æ›´æ–°: 2019-09-28)
 	RECT    rect;
 	rect.left = 0;
 	rect.top = 0;
@@ -58,7 +58,7 @@ T_Engine::T_Engine(HINSTANCE hInstance, LPCTSTR szWindowClass, LPCTSTR szTitle,
 	DeleteObject(hBrush);
 }
 
-// ¸üĞÂ: 2019-10-11(¸Ä±ä»º³åÎ»Í¼±³¾°É«)
+// æ›´æ–°: 2019-10-11(æ”¹å˜ç¼“å†²ä½å›¾èƒŒæ™¯è‰²)
 void T_Engine::SetBackColor(COLORREF bkcolor)
 {
 	RECT    rect;
@@ -72,23 +72,23 @@ void T_Engine::SetBackColor(COLORREF bkcolor)
 	DeleteObject(hBrush);
 }
 
-// Îö¹¹º¯Êı
+// ææ„å‡½æ•°
 T_Engine::~T_Engine()
 {
 	delete p_disp;
-	//¹Ø±ÕGDI+
+	//å…³é—­GDI+
 	Gdiplus::GdiplusShutdown(ptrGdiplusToken);
 }
 
-// »Øµ÷º¯Êı
+// å›è°ƒå‡½æ•°
 LRESULT CALLBACK T_Engine::WndProc(HWND hWnd, UINT msg,
 								WPARAM wParam, LPARAM lParam)
 {
-	// Ö»µ÷ÓÃÀàÖĞµÄÏûÏ¢´¦Àíº¯Êı
+	// åªè°ƒç”¨ç±»ä¸­çš„æ¶ˆæ¯å¤„ç†å‡½æ•°
 	return pEngine->GameEvent(hWnd, msg, wParam, lParam);
 }
 
-// ÓÎÏ·´°¿Ú³õÊ¼»¯´¦Àí
+// æ¸¸æˆçª—å£åˆå§‹åŒ–å¤„ç†
 BOOL T_Engine::GameWinInit()
 {
 	WNDCLASSEX gamewin;
@@ -107,40 +107,40 @@ BOOL T_Engine::GameWinInit()
 
 	if (!RegisterClassEx(&gamewin)) return FALSE;
 
-	// Ê¹´°¿Ú¾ÓÖĞ,»ñÈ¡¿Í»§ÇøÈ«ÆÁÄ»¿í¸ß(È¥µôÈÎÎñÀ¸¸ß¶È)
-	// Èç¹ûÒª»ñÈ¡ÍêÈ«È«ÆÁÄ»¿í¸ß,°üÀ¨ÈÎÎñÀ¸¸ß¶È,Ê¹ÓÃSM_CXSCREENºÍSM_CYSCREEN
-	scrnWidth = GetSystemMetrics(SM_CXFULLSCREEN);	// ÆÁÄ»¿í¶È    
-	scrnHeight = GetSystemMetrics(SM_CYFULLSCREEN);	// ÆÁÄ»¸ß¶È(È¥µôÈÎÎñÀ¸¸ß¶È)
+	// ä½¿çª—å£å±…ä¸­,è·å–å®¢æˆ·åŒºå…¨å±å¹•å®½é«˜(å»æ‰ä»»åŠ¡æ é«˜åº¦)
+	// å¦‚æœè¦è·å–å®Œå…¨å…¨å±å¹•å®½é«˜,åŒ…æ‹¬ä»»åŠ¡æ é«˜åº¦,ä½¿ç”¨SM_CXSCREENå’ŒSM_CYSCREEN
+	scrnWidth = GetSystemMetrics(SM_CXFULLSCREEN);	// å±å¹•å®½åº¦    
+	scrnHeight = GetSystemMetrics(SM_CYFULLSCREEN);	// å±å¹•é«˜åº¦(å»æ‰ä»»åŠ¡æ é«˜åº¦)
 	int x = (scrnWidth - wndWidth) / 2;
 	int y = (scrnHeight - wndHeight) / 2;
 
-	// ½«´°¿Ú°´ÕÕÖ¸¶¨¿Í»§ÇøµÄ³ß´ç½øĞĞµ÷Õû(¸üĞÂ: 2019-09-28)
+	// å°†çª—å£æŒ‰ç…§æŒ‡å®šå®¢æˆ·åŒºçš„å°ºå¯¸è¿›è¡Œè°ƒæ•´(æ›´æ–°: 2019-09-28)
 	RECT ClientRegion = { 0, 0, wndWidth, wndHeight };
 	AdjustWindowRect(&ClientRegion, WS_OVERLAPPEDWINDOW, FALSE);
 
 	m_hWnd = CreateWindow(wndClass, wndTitle,
-		WS_OVERLAPPEDWINDOW & ~WS_SIZEBOX,	// ½ûÖ¹µ÷Õû´óĞ¡
-		x, y, ClientRegion.right - ClientRegion.left, ClientRegion.bottom - ClientRegion.top,	// ¸üĞÂ: 2019-09-28
+		WS_OVERLAPPEDWINDOW & ~WS_SIZEBOX,	// ç¦æ­¢è°ƒæ•´å¤§å°
+		x, y, ClientRegion.right - ClientRegion.left, ClientRegion.bottom - ClientRegion.top,	// æ›´æ–°: 2019-09-28
 		NULL, NULL, m_hInstance, NULL);
 
 	if (!m_hWnd) return FALSE;
 
-	// Èç¹ûÊÇÈ«ÆÁÄ»ÏÔÊ¾
+	// å¦‚æœæ˜¯å…¨å±å¹•æ˜¾ç¤º
 	if (m_bFullScreen == TRUE)
 	{
-		GetWindowRect(m_hWnd, &m_rcOld);//¼Ç×¡µ±Ç°´°¿ÚµÄ³ß´ç
+		GetWindowRect(m_hWnd, &m_rcOld);//è®°ä½å½“å‰çª—å£çš„å°ºå¯¸
 		style = GetWindowLong(m_hWnd, GWL_STYLE);
 		ex_style = GetWindowLong(m_hWnd, GWL_EXSTYLE);
 		p_disp->SaveMode();
-		//È«ÆÁÄ»ÏÔÊ¾
+		//å…¨å±å¹•æ˜¾ç¤º
 		HWND hDesktop;
 		RECT rc;
-		hDesktop = GetDesktopWindow();	//»ñÈ¡×ÀÃæ´°¿ÚµÄÖ¸Õë  
-		GetWindowRect(hDesktop, &rc);	//µÃµ½×ÀÃæ´°¿ÚµÄ¾ØĞÎ
+		hDesktop = GetDesktopWindow();	//è·å–æ¡Œé¢çª—å£çš„æŒ‡é’ˆ  
+		GetWindowRect(hDesktop, &rc);	//å¾—åˆ°æ¡Œé¢çª—å£çš„çŸ©å½¢
 		p_disp->ChangeMode(wndWidth, wndHeight);
-		// ÉèÖÃÎªWS_DLGFRAME¡¢WS_BORDER»ò
-		// WS_EX_CLIENTEDGE¶¼¿ÉÒÔÈ¥µô±êÌâÀ¸
-		// ÉèÖÃÀ©Õ¹·ç¸ñÎªWS_EX_WINDOWEDGE£¬È¥µô´°¿Ú±ß¿ò
+		// è®¾ç½®ä¸ºWS_DLGFRAMEã€WS_BORDERæˆ–
+		// WS_EX_CLIENTEDGEéƒ½å¯ä»¥å»æ‰æ ‡é¢˜æ 
+		// è®¾ç½®æ‰©å±•é£æ ¼ä¸ºWS_EX_WINDOWEDGEï¼Œå»æ‰çª—å£è¾¹æ¡†
 		SetWindowLong(m_hWnd, GWL_EXSTYLE, WS_EX_WINDOWEDGE);
 		SetWindowLong(m_hWnd, GWL_STYLE, WS_BORDER);
 		SetWindowPos(m_hWnd, HWND_TOP, -1, -1,rc.right, rc.bottom, SWP_SHOWWINDOW);
@@ -151,13 +151,13 @@ BOOL T_Engine::GameWinInit()
 	return TRUE;
 }
 
-// ¸½¼Ó°´¼üĞĞÎª´¦Àí(´Ë´¦´¦ÀíESC¼ü)
+// é™„åŠ æŒ‰é”®è¡Œä¸ºå¤„ç†(æ­¤å¤„å¤„ç†ESCé”®)
 void T_Engine::SubKeyAction(WPARAM wParam)
 {
 	int x, y;
-	if(wParam == VK_ESCAPE)//°´ÏÂESC¼ü
+	if(wParam == VK_ESCAPE)//æŒ‰ä¸‹ESCé”®
 	{
-		//»Ö¸´´°¿ÚÄ£Ê½
+		//æ¢å¤çª—å£æ¨¡å¼
 		if(m_bFullScreen == TRUE)
 		{
 			p_disp->ResetMode();
@@ -169,13 +169,13 @@ void T_Engine::SubKeyAction(WPARAM wParam)
 			y = m_rcOld.top;
 			SetWindowPos(m_hWnd, HWND_NOTOPMOST, x, y, 
 				         oldWidth, oldHeight, SWP_SHOWWINDOW);
-			m_bFullScreen = FALSE; // ÉèÖÃ·ÇÈ«ÆÁÏÔÊ¾±êÖ¾
+			m_bFullScreen = FALSE; // è®¾ç½®éå…¨å±æ˜¾ç¤ºæ ‡å¿—
 		}
-		else //ÏÔÊ¾ÍË³ö³ÌĞò¶Ô»°¿ò
+		else //æ˜¾ç¤ºé€€å‡ºç¨‹åºå¯¹è¯æ¡†
 		{
-			//ÏÔÊ¾¹â±ê
+			//æ˜¾ç¤ºå…‰æ ‡
 			ShowCursor(true);
-			if(IDOK==MessageBox(NULL,L"ÄãÈ·¶¨ÒªÍË³öÂğ£¿", wndTitle, 
+			if(IDOK==MessageBox(NULL,L"ä½ ç¡®å®šè¦é€€å‡ºå—ï¼Ÿ", wndTitle, 
 				MB_OKCANCEL|MB_ICONQUESTION))
 			{
 				DestroyWindow(m_hWnd);
@@ -184,7 +184,7 @@ void T_Engine::SubKeyAction(WPARAM wParam)
 	}
 }
 
-//ÏûÏ¢´¦Àíº¯Êı£¬½«±»»Øµ÷º¯Êıµ÷ÓÃ(»ù±¾ÍêÕûµÄÏûÏ¢´¦Àí)
+//æ¶ˆæ¯å¤„ç†å‡½æ•°ï¼Œå°†è¢«å›è°ƒå‡½æ•°è°ƒç”¨(åŸºæœ¬å®Œæ•´çš„æ¶ˆæ¯å¤„ç†)
 LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 {
 	HDC hdc;
@@ -200,30 +200,30 @@ LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		m_hWnd = hWnd;
 		GameInit();
 		return 0;
-	case WM_LBUTTONDOWN: //Êó±ê×ó¼ü°´ÏÂµÄ´¦Àí
+	case WM_LBUTTONDOWN: //é¼ æ ‡å·¦é”®æŒ‰ä¸‹çš„å¤„ç†
 		GameMouseAction(LOWORD(lParam), HIWORD(lParam), MOUSE_LCLICK);
 		return 0;
 	case WM_RBUTTONDOWN:
 		GameMouseAction(LOWORD(lParam), HIWORD(lParam), MOUSE_RCLICK);
 		return 0;
-	case WM_MOUSEMOVE: //Êó±êÒÆ¶¯´¦Àí
+	case WM_MOUSEMOVE: //é¼ æ ‡ç§»åŠ¨å¤„ç†
 		GameMouseAction(LOWORD(lParam), HIWORD(lParam), MOUSE_MOVE);
 		return 0;
-	case WM_KEYDOWN: //¼ü±»°´ÏÂµÄ´¦Àí
+	case WM_KEYDOWN: //é”®è¢«æŒ‰ä¸‹çš„å¤„ç†
 
-		// ¼ÇÂ¼¶ÔÓ¦µÄ°´¼ü×´Ì¬
+		// è®°å½•å¯¹åº”çš„æŒ‰é”®çŠ¶æ€
 		keys[wParam] = true;
-		// Ö´ĞĞÓÎÏ·°´¼üĞĞÎª
+		// æ‰§è¡Œæ¸¸æˆæŒ‰é”®è¡Œä¸º
 		GameKeyAction(wParam,KEY_DOWN);
-		// ¸½¼Ó°´¼üĞĞÎª´¦Àí
+		// é™„åŠ æŒ‰é”®è¡Œä¸ºå¤„ç†
 		SubKeyAction(wParam);
 
 		return 0;
-	case WM_KEYUP:  //ÊÍ·Å°´¼ü´¦Àí
+	case WM_KEYUP:  //é‡Šæ”¾æŒ‰é”®å¤„ç†
 		keys[wParam] = false;
 		GameKeyAction(wParam,KEY_UP);
 		return 0;
-	case WM_NCLBUTTONDBLCLK:  //½ûÖ¹Ë«»÷´°¿Ú±êÌâÀ¸×î´ó»¯´°¿Ú 
+	case WM_NCLBUTTONDBLCLK:  //ç¦æ­¢åŒå‡»çª—å£æ ‡é¢˜æ æœ€å¤§åŒ–çª—å£ 
 		if(HTCAPTION==wParam)   
 		{   
 			return 0;   
@@ -231,22 +231,22 @@ LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 	case WM_SYSCOMMAND:
 		if(wParam == SC_MAXIMIZE)
 		{
-			m_bFullScreen=!m_bFullScreen; // ÉèÖÃÈ«ÆÁÏÔÊ¾±êÖ¾
+			m_bFullScreen=!m_bFullScreen; // è®¾ç½®å…¨å±æ˜¾ç¤ºæ ‡å¿—
 			if(m_bFullScreen)
 			{
-				GetWindowRect(hWnd, &m_rcOld);//¼Ç×¡µ±Ç°´°¿ÚµÄ³ß´ç
+				GetWindowRect(hWnd, &m_rcOld);//è®°ä½å½“å‰çª—å£çš„å°ºå¯¸
 				style = GetWindowLong(hWnd,GWL_STYLE); 
 				ex_style = GetWindowLong(hWnd, GWL_EXSTYLE); 
 				p_disp->SaveMode();
-				//È«ÆÁÄ»ÏÔÊ¾
+				//å…¨å±å¹•æ˜¾ç¤º
 				HWND hDesktop;   
 				RECT rc;  
-				hDesktop = GetDesktopWindow();	//»ñÈ¡×ÀÃæ´°¿ÚµÄÖ¸Õë  
-				GetWindowRect(hDesktop, &rc);	//µÃµ½×ÀÃæ´°¿ÚµÄ¾ØĞÎ
+				hDesktop = GetDesktopWindow();	//è·å–æ¡Œé¢çª—å£çš„æŒ‡é’ˆ  
+				GetWindowRect(hDesktop, &rc);	//å¾—åˆ°æ¡Œé¢çª—å£çš„çŸ©å½¢
 				p_disp->ChangeMode(wndWidth, wndHeight);
-				// ÉèÖÃÎªWS_DLGFRAME¡¢WS_BORDER»ò
-				//  WS_EX_CLIENTEDGE¶¼¿ÉÒÔÈ¥µô±êÌâÀ¸
-				// ÉèÖÃÀ©Õ¹·ç¸ñÎªWS_EX_WINDOWEDGE£¬È¥µô´°¿Ú±ß¿ò
+				// è®¾ç½®ä¸ºWS_DLGFRAMEã€WS_BORDERæˆ–
+				//  WS_EX_CLIENTEDGEéƒ½å¯ä»¥å»æ‰æ ‡é¢˜æ 
+				// è®¾ç½®æ‰©å±•é£æ ¼ä¸ºWS_EX_WINDOWEDGEï¼Œå»æ‰çª—å£è¾¹æ¡†
 				SetWindowLong(hWnd, GWL_EXSTYLE, WS_EX_WINDOWEDGE);
 				SetWindowLong(hWnd, GWL_STYLE, WS_BORDER);
 				SetWindowPos(hWnd, HWND_TOP, -1, -1, 
@@ -255,7 +255,7 @@ LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		}
 		else if(wParam == SC_CLOSE)
 		{
-			if(IDOK==MessageBox(NULL,L"ÄãÈ·¶¨ÒªÍË³öÂğ£¿", 
+			if(IDOK==MessageBox(NULL,L"ä½ ç¡®å®šè¦é€€å‡ºå—ï¼Ÿ", 
 				wndTitle, MB_OKCANCEL|MB_ICONQUESTION))
 			{
 				DestroyWindow(hWnd);
@@ -263,21 +263,21 @@ LRESULT T_Engine::GameEvent(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 		}
 		else
 		{
-			//ÓÉÓÚWM_SYSCOMMANDÏûÏ¢²»ÊÇÓÉ³ÌĞò¿ØÖÆµÄ£¬
-			//ËùÒÔ±ØĞë½«¸ÃÏûÏ¢´«¸øDefWindowProc,·ñÔò»áÔì³ÉÆäËûÏûÏ¢ÎŞ·¨´¦Àí
+			//ç”±äºWM_SYSCOMMANDæ¶ˆæ¯ä¸æ˜¯ç”±ç¨‹åºæ§åˆ¶çš„ï¼Œ
+			//æ‰€ä»¥å¿…é¡»å°†è¯¥æ¶ˆæ¯ä¼ ç»™DefWindowProc,å¦åˆ™ä¼šé€ æˆå…¶ä»–æ¶ˆæ¯æ— æ³•å¤„ç†
 			return DefWindowProc(hWnd, WM_SYSCOMMAND, wParam,lParam); 
 		}
 		return 0;
 	case WM_CLOSE:
 		DestroyWindow(hWnd);
 		return 0;
-	case WM_PAINT: //´°¿Ú»æÖÆ
+	case WM_PAINT: //çª—å£ç»˜åˆ¶
 		PAINTSTRUCT ps;
 		hdc=BeginPaint(hWnd,&ps);
 		GamePaint(hdc);
 		EndPaint(hWnd,&ps);	
 		return 0;
-	case WM_DESTROY: //³ÌĞòÏú»Ù
+	case WM_DESTROY: //ç¨‹åºé”€æ¯
 		PostQuitMessage(0);
 		return 0;
 	}
@@ -290,56 +290,56 @@ void T_Engine::StartEngine()
 	static int TickElapsed = 0;
 	int nowTick;
 
-	GameWinInit();						// ³õÊ¼»¯ÓÎÏ·´°¿Ú
-	srand( (unsigned)time( NULL ) );	// ³õÊ¼»¯Ëæ»úÊı
+	GameWinInit();						// åˆå§‹åŒ–æ¸¸æˆçª—å£
+	srand( (unsigned)time( NULL ) );	// åˆå§‹åŒ–éšæœºæ•°
 
-	// ÓÎÏ·Ö÷Ñ­»·
+	// æ¸¸æˆä¸»å¾ªç¯
 	while (TRUE)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
-			// Èç¹ûÕì²âµ½WM_QUITÔòÍË³öÓÎÏ·Ñ­»·
+			// å¦‚æœä¾¦æµ‹åˆ°WM_QUITåˆ™é€€å‡ºæ¸¸æˆå¾ªç¯
 			if (msg.message == WM_QUIT) break;
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
 		else
 		{
-			// È·±£ÓÎÏ·Ã»ÓĞ½øÈëË¯Ãß×´Ì¬
+			// ç¡®ä¿æ¸¸æˆæ²¡æœ‰è¿›å…¥ç¡çœ çŠ¶æ€
 			if (!GetSleep())
 			{
-				// ÅĞ¶ÁÓÎÏ·Ñ­»·µÄÊ±¼ä
+				// åˆ¤è¯»æ¸¸æˆå¾ªç¯çš„æ—¶é—´
 				nowTick = GetTickCount();
 				if (nowTick > TickElapsed)
 				{
 					TickElapsed = nowTick + GetInterval();
-					//´¦ÀíÓÎÏ·Âß¼­
+					//å¤„ç†æ¸¸æˆé€»è¾‘
 					GameLogic();
 					if (quickRender == FALSE)
 					{
-						//ÔÚÄÚ´æÖĞ»æÖÆÄÚÈİ
+						//åœ¨å†…å­˜ä¸­ç»˜åˆ¶å†…å®¹
 						GamePaint(bufferDC);
-						//»ñÈ¡ÓÎÏ·´°¿Ú¾ä±ú¼°»æÍ¼Éè±¸
+						//è·å–æ¸¸æˆçª—å£å¥æŸ„åŠç»˜å›¾è®¾å¤‡
 						HDC hDC = GetDC(m_hWnd);
-						//½«ÄÚ´æÉè±¸ÖĞ»æÖÆµÄÄÚÈİ»æµ½ÆÁÄ»ÉÏ
+						//å°†å†…å­˜è®¾å¤‡ä¸­ç»˜åˆ¶çš„å†…å®¹ç»˜åˆ°å±å¹•ä¸Š
 						BitBlt(hDC, 0, 0, wndWidth, wndHeight, bufferDC, 0, 0, SRCCOPY);
-						//ÊÍ·ÅÉè±¸
+						//é‡Šæ”¾è®¾å¤‡
 						ReleaseDC(m_hWnd, hDC);
 					}
 				}
 				if (quickRender == TRUE)
 				{
-					//ÔÚÄÚ´æÖĞ»æÖÆÄÚÈİ
+					//åœ¨å†…å­˜ä¸­ç»˜åˆ¶å†…å®¹
 					GamePaint(bufferDC);
-					//»ñÈ¡ÓÎÏ·´°¿Ú¾ä±ú¼°»æÍ¼Éè±¸
+					//è·å–æ¸¸æˆçª—å£å¥æŸ„åŠç»˜å›¾è®¾å¤‡
 					HDC hDC = GetDC(m_hWnd);
-					//½«ÄÚ´æÉè±¸ÖĞ»æÖÆµÄÄÚÈİ»æµ½ÆÁÄ»ÉÏ
+					//å°†å†…å­˜è®¾å¤‡ä¸­ç»˜åˆ¶çš„å†…å®¹ç»˜åˆ°å±å¹•ä¸Š
 					BitBlt(hDC, 0, 0, wndWidth, wndHeight, bufferDC, 0, 0, SRCCOPY);
-					//ÊÍ·ÅÉè±¸
+					//é‡Šæ”¾è®¾å¤‡
 					ReleaseDC(m_hWnd, hDC);
 				}
 			}
 		}
 	}
-	pEngine->GameEnd();  // ÓÎÏ·½áÊø´¦Àí
+	pEngine->GameEnd();  // æ¸¸æˆç»“æŸå¤„ç†
 }

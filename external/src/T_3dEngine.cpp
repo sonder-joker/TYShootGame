@@ -29,7 +29,6 @@ void T_3dEngine::GamePaint(HDC hdc)
 
 void T_3dEngine::GameEnd()
 {
-	//Ëæ±ã°É
 }
 
 void T_3dEngine::GameKeyAction(int KeyType,int ActionType)

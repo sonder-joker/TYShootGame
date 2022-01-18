@@ -1,10 +1,10 @@
 //*******************************************************************
-// TinyEngineÒıÇæ  
-// ×÷Õß: ÍòÁ¢ÖĞ(WanLizhong)
-// ²©¿Í: www.wanlizhong.com 
-// ÈÕÆÚ: 2013-08-02
-// ¸üĞÂ: 2020-12-20
-// °æÈ¨ËùÓĞ 2007-2021 ÍòÁ¢ÖĞ
+// TinyEngineå¼•æ“  
+// ä½œè€…: ä¸‡ç«‹ä¸­(WanLizhong)
+// åšå®¢: www.wanlizhong.com 
+// æ—¥æœŸ: 2013-08-02
+// æ›´æ–°: 2020-12-20
+// ç‰ˆæƒæ‰€æœ‰ 2007-2021 ä¸‡ç«‹ä¸­
 // (C) 2007-2021 WanLizhong All Rights Reserved
 //*******************************************************************
 
@@ -47,7 +47,7 @@ void T_Menu::SetClickSound(AudioDXBuffer* mc_buffer)
 }
 */
 
-//ÉèÖÃ²Ëµ¥±³¾°Í¼Æ¬
+//è®¾ç½®èœå•èƒŒæ™¯å›¾ç‰‡
 void T_Menu::SetMenuBkg(wstring img_path, int x, int y, int alphaLevel)
 {
 	if (img_path.length() > 0)
@@ -67,7 +67,7 @@ void T_Menu::SetMenuBkgColor(COLORREF bkgColor, int x, int y, int alphaLevel)
 	bkImageAlpha = alphaLevel;
 }
 
-//Ìí¼ÓÕı³£²Ëµ¥Í¼Æ¬
+//æ·»åŠ æ­£å¸¸èœå•å›¾ç‰‡
 void T_Menu::SetBtnBmp(wstring img_path, int btnWidth, int btnHeight, int btnAlpha)
 {
 	if(img_path.length()>0)
@@ -82,7 +82,7 @@ void T_Menu::SetBtnBmp(wstring img_path, int btnWidth, int btnHeight, int btnAlp
 	}
 }
 
-//Ìí¼Ó²Ëµ¥ÎÄ×ÖÏîÄ¿
+//æ·»åŠ èœå•æ–‡å­—é¡¹ç›®
 void T_Menu::AddMenuItem(MENUITEM menuItem)
 {
 	gm_menuItems.push_back(menuItem);
@@ -91,13 +91,13 @@ void T_Menu::AddMenuItem(MENUITEM menuItem)
 		MaxMenuItemLen = len;
 }
 
-//ÉèÖÃÊ×²Ëµ¥ÏîµÄ×ø±ê¼°²Ëµ¥¼ä¸ô¾àÀë
+//è®¾ç½®é¦–èœå•é¡¹çš„åæ ‡åŠèœå•é—´éš”è·ç¦»
 void T_Menu::SetMenuInfo(MENU_INFO menuInfo)
 {
 	menu_info = menuInfo;
 }
 
-//²Ëµ¥»æÖÆ
+//èœå•ç»˜åˆ¶
 void T_Menu::DrawMenu(HDC hdc)
 {
 	if (backColor != NULL)
@@ -115,7 +115,7 @@ void T_Menu::DrawMenu(HDC hdc)
 
 	int FontHeight;
 	int px = 0;
-	int w_px = w/(MaxMenuItemLen+1);	//¼ÆËãÃ¿¸ö×ÖËùÕ¼µÄÏñËØ
+	int w_px = w/(MaxMenuItemLen+1);	//è®¡ç®—æ¯ä¸ªå­—æ‰€å çš„åƒç´ 
 	int h_px = (int)((float)(h/2.5));
 	if(w_px > h_px) 
 	{
@@ -125,7 +125,7 @@ void T_Menu::DrawMenu(HDC hdc)
 	{
 		px = w_px;
 	}
-	FontHeight = (px*72)/96;		//¸ù¾İÃ¿¸ö×ÖµÄÏñËØ¼ÆËã×ÖºÅ
+	FontHeight = (px*72)/96;		//æ ¹æ®æ¯ä¸ªå­—çš„åƒç´ è®¡ç®—å­—å·
 
 	if(isItemFocused == FALSE)
 	{
@@ -136,7 +136,7 @@ void T_Menu::DrawMenu(HDC hdc)
 			int x = iter->pos.x;
 			int y = iter->pos.y;
 			
-			// »æÖÆ°´Å¥Í¼Ïñ
+			// ç»˜åˆ¶æŒ‰é’®å›¾åƒ
 			if(&BtnDIB != NULL)
 			{
 				BtnDIB.PaintRegion(BtnDIB.GetBmpHandle(), hdc, x, y, 0, 0, w, h, 1, 0, btnAlphaLevel);
@@ -146,7 +146,7 @@ void T_Menu::DrawMenu(HDC hdc)
 			Rec.Width = (float)w;	
 			Rec.Height = (float)h;
 
-			// »æÖÆ°´Å¥ÎÄ×Ö
+			// ç»˜åˆ¶æŒ‰é’®æ–‡å­—
 			wstring item = iter->ItemName.c_str();
 			T_Graph::PaintText(hdc, Rec, item.c_str(), (REAL)FontHeight, menu_info.fontName, 
 				               menu_info.normalTextColor, GetFontStyle(), GetAlignment());
@@ -197,7 +197,7 @@ void T_Menu::DrawMenu(HDC hdc)
 	}
 }
 
-//¸ù¾İµ±Ç°Êó±ê×ø±ê¼ÆËã²Ëµ¥ÏîË÷ÒıºÅ
+//æ ¹æ®å½“å‰é¼ æ ‡åæ ‡è®¡ç®—èœå•é¡¹ç´¢å¼•å·
 int T_Menu::GetMenuIndex(int x, int y)
 {
 	int Index = -1;
@@ -258,7 +258,7 @@ FontStyle T_Menu::GetFontStyle()
 	return fStyle;
 }
 
-//²Ëµ¥Êó±êµã»÷ÊÂ¼ş´¦Àí
+//èœå•é¼ æ ‡ç‚¹å‡»äº‹ä»¶å¤„ç†
 int T_Menu::MenuMouseClick(int x, int y)
 {
 	m_index = GetMenuIndex(x, y);
@@ -276,15 +276,15 @@ int T_Menu::MenuMouseClick(int x, int y)
 	return m_index;
 }
 
-//²Ëµ¥Êó±êÒÆ¶¯ÊÂ¼ş´¦Àí
+//èœå•é¼ æ ‡ç§»åŠ¨äº‹ä»¶å¤„ç†
 void T_Menu::MenuMouseMove(int x, int y)
 {
-	lastIndex = m_index;//¼ÇÂ¼Ç°Ò»´ÎµÄË÷ÒıÖµ
+	lastIndex = m_index;//è®°å½•å‰ä¸€æ¬¡çš„ç´¢å¼•å€¼
 	m_index = GetMenuIndex(x,y);
 	if(m_index >= 0)
 	{
 		isItemFocused = true;
-		//±£Ö¤Êó±êÒÆ¹ı°´Å¥Ö»²¥·ÅÒ»´ÎÉùÒô
+		//ä¿è¯é¼ æ ‡ç§»è¿‡æŒ‰é’®åªæ’­æ”¾ä¸€æ¬¡å£°éŸ³
 		if(lastIndex != m_index) 
 		{
 			/*
@@ -346,12 +346,12 @@ int T_Menu::MenuKeyDown(WPARAM key)
 
 void T_Menu::DestroyAll()
 {
-	// É¾³ı²Ëµ¥±³¾°
+	// åˆ é™¤èœå•èƒŒæ™¯
 	if (gm_menuBkg.GetBmpHandle() != NULL)
 	{
 		gm_menuBkg.Destroy();	
 	}
-	// É¾³ı°´Å¥Í¼Æ¬
+	// åˆ é™¤æŒ‰é’®å›¾ç‰‡
 	if (BtnDIB.GetBmpHandle() != NULL)
 	{
 		BtnDIB.Destroy();
