@@ -11,5 +11,3 @@ public:
     int kill = 0;
 };
 
-
-#endif //TYSHOOTGAME_PLAYERLOGIC_H

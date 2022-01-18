@@ -6,7 +6,7 @@
 //地图数据存储类
 
 struct Rast {
-    Rast(int _graph = 0, float _x = 0, float offset = 0) : graphIndex(_graph), x(x), offset(offset) {
+    Rast(int _graph = 0, float x = 0, float offset = 0) : graphIndex(_graph), x(x), offset(offset) {
 
     }
 
