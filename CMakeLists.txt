@@ -10,6 +10,8 @@ add_subdirectory(external)
 file(GLOB TYShootGame_SRC CONFIGURE_DEPENDS "src/*.cpp")
 
 add_executable(${PROJECT_NAME} WIN32 ${TYShootGame_SRC})
+
+file(COPY Map DESTINATION ${CMAKE_BINARY_DIR})
 target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(${PROJECT_NAME} GameEngine)
 
