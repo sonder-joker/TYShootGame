@@ -1,9 +1,5 @@
-//
-// Created by yang on 2022/1/18.
-//
+#pragma once
 
-#ifndef TYSHOOTGAME_T_SCENE_H
-#define TYSHOOTGAME_T_SCENE_H
 #include "T_Config.h"
 #include "T_GameObject.h"
 #include "T_Render.h"
@@ -21,5 +17,3 @@ public:
     unique_ptr<T_Map> gameMap;
 };
 
-
-#endif //TYSHOOTGAME_T_SCENE_H

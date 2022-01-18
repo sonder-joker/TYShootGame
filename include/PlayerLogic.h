@@ -1,12 +1,5 @@
-//
-// Created by yang on 2022/1/18.
-//
-
-#ifndef TYSHOOTGAME_PLAYERLOGIC_H
-#define TYSHOOTGAME_PLAYERLOGIC_H
-
+#pragma once
 #include "T_GameObject.h"
-
 
 class PlayerLogic:public T_Component {
 public:

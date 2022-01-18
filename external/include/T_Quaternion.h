@@ -1,6 +1,4 @@
 #pragma once
-#ifndef T_QUATERNION_H
-#define T_QUATERNION_H
 #include <type_traits>
 #include <iostream>
 #include <stdexcept>
@@ -28,5 +26,4 @@ public:
     void conjugate();
 };
 
-#endif
 

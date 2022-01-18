@@ -1,9 +1,5 @@
-//
-// Created by yang on 2022/1/15.
-//
+#pragma once
 
-#ifndef TYSHOOTGAME_T_MAP_H
-#define TYSHOOTGAME_T_MAP_H
 #include "T_Config.h"
 #include "T_GameObject.h"
 
@@ -40,5 +36,3 @@ public:
 };
 
 
-
-#endif //TYSHOOTGAME_T_MAP_H

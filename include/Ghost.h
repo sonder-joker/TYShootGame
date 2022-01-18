@@ -1,9 +1,4 @@
-//
-// Created by yang on 2022/1/18.
-//
-
-#ifndef TYSHOOTGAME_GHOST_H
-#define TYSHOOTGAME_GHOST_H
+#pragma once
 
 #include <T_GameObject.h>
 #include <T_Render.h>
@@ -22,4 +17,3 @@ public:
     void Start()override;
 
 };
-#endif //TYSHOOTGAME_GHOST_H
