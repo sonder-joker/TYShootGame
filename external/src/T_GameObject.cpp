@@ -10,7 +10,6 @@ T_GameObject& T_GameObjectManager::AddGameObject(unique_ptr<T_GameObject> gameOb
 	return *gameObjectArray[gameObjectArray.size()-1];
 }
 
-T_Scene* T_Scene::activeScene=nullptr;
 
 
 void T_GameObjectManager::ClearGameObject()
@@ -180,12 +179,6 @@ T_Component::T_Component(T_GameObject& tGameObject):gameObject(tGameObject) {
 
 }
 
-T_Scene::T_Scene()
-{
-    activeScene=this;
-	gameObjectManager = make_unique<T_GameObjectManager>();
-	//renderManager = make_unique<T_Render>();
-}
 
 T_Transform::T_Transform()
 {

@@ -16,16 +16,6 @@ public:
 	virtual void KeyAction(int KeyType, int ActionType){};
 	virtual void MouseAction(int x, int y, int ActionType){};
 };
-class T_Scene {
-public:
-	T_Scene();
-	static T_Scene* activeScene;
-    static T_Scene& GetActiveScene(){return *activeScene;};
-	virtual void LoadScene() = 0;
-	vector<shared_ptr<T_IManager>> ManagerMap;
-	unique_ptr<T_GameObjectManager> gameObjectManager;
-	unique_ptr<T_IManager> renderManager;
-};
 
 
 class T_Component

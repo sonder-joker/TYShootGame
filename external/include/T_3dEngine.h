@@ -2,6 +2,7 @@
 #include "T_Engine.h"
 #include "T_GameObject.h"
 #include "T_Render.h"
+#include "T_Scene.h"
 class T_3dEngine :
     public T_Engine
 {

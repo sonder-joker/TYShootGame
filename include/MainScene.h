@@ -1,6 +1,7 @@
 #pragma once
 #include "T_GameObject.h"
 #include "T_Map.h"
+#include "T_Scene.h"
 
 class MainScene :
     public T_Scene
@@ -12,6 +13,6 @@ public:
 class TestScene:
         public T_Scene{
 public:
-    unique_ptr<T_Map> gameMap;
+
     void LoadScene() override;
 };

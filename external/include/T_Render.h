@@ -38,7 +38,8 @@ public:
     constexpr static const float MAX_VISIT_LENGHT=5.0;
     //单步长度
     constexpr static const float LENGHT_SINGLE_VISIT_STEP=0.005;
-
+    //距离渲染倍数
+    constexpr static const float FIX_RENDER_LENGHT=5.0;
 
     static const COLORREF SKY_COLOR_UP=RGB(0,191,255);
     static const COLORREF SKY_COLOR_DOWN=RGB(135,206,235);
@@ -63,6 +64,9 @@ public:
 class Sprite :
         public T_Component
 {
-    explicit Sprite(T_GameObject& gameObject, int _graphIndex) :T_Component(gameObject) { graphIndex = _graphIndex; }
+public:
+    static shared_ptr<Sprite> CreateSprite(T_GameObject& gameObject,int graphIndex);
     int graphIndex;
+    float distanceToCamera=0;
+    explicit Sprite(T_GameObject& gameObject, int _graphIndex) :T_Component(gameObject) { graphIndex = _graphIndex; }
 };
