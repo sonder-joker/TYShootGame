@@ -4,12 +4,11 @@
 
 #include "T_Scene.h"
 
-T_Scene* T_Scene::activeScene=nullptr;
+T_Scene *T_Scene::activeScene = nullptr;
 
 
-T_Scene::T_Scene()
-{
-    activeScene=this;
+T_Scene::T_Scene() {
+    activeScene = this;
     gameObjectManager = make_unique<T_GameObjectManager>();
     //renderManager = make_unique<T_Render>();
 }
