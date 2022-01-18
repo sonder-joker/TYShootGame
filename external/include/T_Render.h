@@ -17,6 +17,7 @@ class T_Render :
         public T_IManager
 {
 public:
+    wstring topText = L"";
     explicit T_Render(T_Map& map);
     void Init(int width,int height);
     int GetManagerID() override {return 1;}
@@ -35,7 +36,7 @@ public:
 
     //常量↓
     //最远视域距离
-    constexpr static const float MAX_VISIT_LENGHT=5.0;
+    constexpr static const float MAX_VISIT_LENGHT=10.0;
     //单步长度
     constexpr static const float LENGHT_SINGLE_VISIT_STEP=0.005;
     //距离渲染倍数
@@ -66,6 +67,7 @@ class Sprite :
 {
 public:
     static shared_ptr<Sprite> CreateSprite(T_GameObject& gameObject,int graphIndex);
+    string GetComponentName() override { return "Sprite"; }
     int graphIndex;
     float distanceToCamera=0;
     explicit Sprite(T_GameObject& gameObject, int _graphIndex) :T_Component(gameObject) { graphIndex = _graphIndex; }

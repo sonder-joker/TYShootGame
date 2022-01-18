@@ -3,6 +3,7 @@
 void T_3dEngine::GameInit()
 {
 	scene->LoadScene();
+	scene->gameObjectManager->Start();
 }
 
 void T_3dEngine::GameLogic()

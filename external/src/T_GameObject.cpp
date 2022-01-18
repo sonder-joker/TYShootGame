@@ -7,9 +7,18 @@ T_GameObjectManager::T_GameObjectManager()
 T_GameObject& T_GameObjectManager::AddGameObject(unique_ptr<T_GameObject> gameObject)
 {
 	gameObjectArray.push_back(move(gameObject));
-	return *gameObjectArray[gameObjectArray.size()-1];
+	return **gameObjectArray.rbegin();
 }
 
+void T_GameObjectManager::Start() {
+	for (auto& gameObjectItor : gameObjectArray) {
+		if (gameObjectItor->isActive) {
+			for (auto& componentItor : gameObjectItor->componentArray) {
+				componentItor->Start();
+			}
+		}
+	}
+}
 
 
 void T_GameObjectManager::ClearGameObject()

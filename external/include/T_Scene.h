@@ -17,6 +17,7 @@ public:
     vector<shared_ptr<T_IManager>> ManagerMap;
     unique_ptr<T_GameObjectManager> gameObjectManager;
     unique_ptr<T_Render> renderManager;
+
     unique_ptr<T_Map> gameMap;
 };
 

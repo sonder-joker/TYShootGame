@@ -16,3 +16,9 @@ public:
 
     void LoadScene() override;
 };
+
+class Scene1:
+        public T_Scene{
+public:
+    void LoadScene() override;
+};

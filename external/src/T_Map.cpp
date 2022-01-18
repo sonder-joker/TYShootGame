@@ -12,6 +12,10 @@ bool T_Map::LoadNewMapWallSprite(string path="test") {
     mapWallSprite[2]=T_Graph(L"./Map/Sprite/2.png");
     mapWallSprite[3]=T_Graph(L"./Map/Sprite/3.png");
     mapWallSprite[50] = T_Graph(L"./Map/Sprite/flower.png");
+    mapWallSprite[51] =T_Graph(L"./Map/Sprite/ghost.png");
+    mapWallSprite[52] =T_Graph(L"./Map/Sprite/flag.png");
+    mapWallSprite[53] = T_Graph(L"./Map/Sprite/gun.png");
+    mapWallSprite[54] = T_Graph(L"./Map/Sprite/dead_ghost.png");
     return true;
 }
 

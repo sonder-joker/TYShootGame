@@ -9,7 +9,8 @@ class T_GameObjectManager;
 class T_IManager {
 public:
     virtual int GetManagerID() { return -1; };
-	virtual void Update(){};
+    virtual void Start() {};
+    virtual void Update(){};
     virtual void Update(HDC hdc){};
 	virtual void UpdateLate(){};
 	virtual void FixedUpdate() {};
@@ -79,6 +80,7 @@ public:
     void ClearGameObject();
     bool gameObjectClearFlag = false;
     void Destroy(unique_ptr<T_GameObject>& gameObject);
+    void Start() override;
     void Update() override;
     void UpdateLate() override;
     void FixedUpdate() override;

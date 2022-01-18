@@ -21,6 +21,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     LPCTSTR title=L"Shooter";
     T_3dEngine* engine=new T_3dEngine(hInstance,WIN_CLASS,title, NULL, NULL, 1024, 768);
-    engine->scene=make_unique<TestScene>();
+    engine->scene=make_unique<MainScene>();
     engine->StartEngine();
 }

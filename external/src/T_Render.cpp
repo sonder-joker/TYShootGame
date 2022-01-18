@@ -71,37 +71,26 @@ void T_Render::RenderUpdate(HDC hdc)
         Sprite& sprite=*spriteArray[index];
         if(!sprite.gameObject.isActive||sprite.distanceToCamera>MAX_VISIT_LENGHT) continue;
         //计算是否在渲染屏幕内
-        float cost= -(sprite.gameObject.transform.position.z-playerPos.z)/sprite.distanceToCamera;
-        float sint= -(sprite.gameObject.transform.position.x-playerPos.x)/sprite.distanceToCamera;
-        float thea=acos(cost);
-        if(cost>=0&&sint>=0){
-            thea+=0;
-        }else if(cost<0&&sint>=0){
-            thea=Pi-thea;
-        }else if(cost<0&&sint<0){
-            thea+=Pi;
-        }else{
-            thea=-thea;
-        }
+        float thea= atan2(sprite.gameObject.transform.position.z-playerPos.z,sprite.gameObject.transform.position.x-playerPos.x);
         float rot=playerRot.x;
-        rot= fmodf(rot,2*Pi);
-        if(rot<0) rot+=2*Pi;
+        while(thea-rot>Pi) thea-=2*Pi;
+        while(thea-rot<-Pi) thea+=2*Pi;
         if(
                 (thea>=rot-camera->cameraFov/2&&thea<=rot+camera->cameraFov/2)
         ){
             //开始渲染
-            thea-=rot-camera->cameraFov/2;
-            float lenToSprite=sprite.distanceToCamera*cosf(thea)/FIX_RENDER_LENGHT;
-            int rastOffset=(int)(thea*screenWidth/camera->cameraFov);
-            int nowWidth=(int)(T_Map::TEXTURE_WIDTH/(lenToSprite));
-            int nowHeight=(int)(T_Map::TEXTURE_HEIGHT/(lenToSprite));
-            int maxLine=min(nowWidth/2+rastOffset+1,screenWidth);
-            int startLine=rastOffset-nowWidth/2;
+            float spriteScreenSize=min(2000,screenHeight/(sprite.distanceToCamera*4));
+            //int rastOffset=(int)(thea*screenWidth/camera->cameraFov)+screenWidth/2;
+            //(thea - rot)*(screenWidth)/(fov) + (screenWidth)/2 - sprite_screen_size/2;
+            int vOffset=(thea-rot)*(screenWidth)/camera->cameraFov+(screenWidth)/2-spriteScreenSize/2;
+            int hOffset=screenHeight/2.0-spriteScreenSize/2.0;
             SelectObject(memDC,T_Map::mapWallSprite[sprite.graphIndex].GetBmpHandle());
-            for(int screenLine=max(0,startLine);screenLine<maxLine;screenLine++){
-                if(wallDistance[screenLine]>sprite.distanceToCamera){
-                    float tx=(screenLine-startLine)*1.0/nowWidth;
-                    TransparentBlt(hdc,screenLine,midHeight-nowHeight/2,1,nowHeight,
+            for(int i=0;i<spriteScreenSize;i++){
+                if(vOffset+i<0||vOffset+i>=screenWidth) continue;
+                if(wallDistance[vOffset+i]>sprite.distanceToCamera){
+                    float tx=(i)*1.0/spriteScreenSize;
+                    //BitBlt(hdc,vOffset,hOffset,64,64,memDC,0,0,SRCCOPY);
+                    TransparentBlt(hdc,vOffset+i,hOffset-sprite.gameObject.transform.position.y*spriteScreenSize,1,spriteScreenSize,
                                memDC,tx*T_Map::TEXTURE_WIDTH,0,1,T_Map::TEXTURE_HEIGHT,RGB(0,0,0));
                     //没时间搞掩码图了，直接就这样吧
                 }
@@ -110,23 +99,15 @@ void T_Render::RenderUpdate(HDC hdc)
         //
 
     }
-//    int midHeight=screenHeight/2;
-//    HDC memDC= CreateCompatibleDC(destDC);
-//    HBITMAP oldBitmap=(HBITMAP) SelectObject(memDC,T_Map::mapWallSprite[1].GetBmpHandle());
-//    for(int screenLine=0;screenLine<screenWidth;++screenLine){
-//        if(wallDepth[screenLine].graphIndex > 0){
-//            Rast& rast=wallDepth[screenLine];
-//            SelectObject(memDC,T_Map::mapWallSprite[rast.graphIndex].GetBmpHandle());
-//            StretchBlt(destDC,screenLine,midHeight-T_Map::TEXTURE_HEIGHT/(rast.offset*2),1,T_Map::TEXTURE_HEIGHT/rast.offset,
-//                       memDC,rast.x*T_Map::TEXTURE_WIDTH,0,1,T_Map::TEXTURE_HEIGHT,SRCCOPY);
-//
-//        }
-//    }
-//    SelectObject(memDC,oldBitmap);
-//    DeleteObject(memDC);
-//    DeleteObject(oldBitmap);
 
     //绘制UI之类的？
+
+    SelectObject(memDC, T_Map::mapWallSprite[53].GetBmpHandle());
+
+    TransparentBlt(hdc, 800, 400, 256, 256,
+        memDC, 0, 0, T_Map::TEXTURE_WIDTH, T_Map::TEXTURE_HEIGHT, RGB(0, 0, 0));
+    SetTextAlign(hdc, TA_CENTER);
+    TextOut(hdc, 512, 20, topText.c_str(), topText.size());
 
     SelectObject(memDC,tempBitmap);
     DeleteObject(memDC);
