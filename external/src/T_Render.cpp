@@ -43,7 +43,7 @@ void T_Render::RenderUpdate(HDC hdc)
             if(rast.graphIndex==-1) break;
             if(rast.graphIndex!=0){
                 wallDistance[lineNum] = offset;
-                float lenToWall=offset*cosf(nowX-playerRot.x)/FIX_RENDER_LENGHT;
+                float lenToWall=offset*cos(nowX-playerRot.x)/FIX_RENDER_LENGHT;
                 rast.offset=lenToWall;
                 wallDepth[lineNum]=rast;
                 break;
@@ -61,7 +61,7 @@ void T_Render::RenderUpdate(HDC hdc)
     for(int index=0;index<spriteArray.size();++index){
         Sprite& sprite=*spriteArray[index];
         float tx=sprite.gameObject.transform.position.x-playerPos.x;
-        float ty=sprite.gameObject.transform.position.y-playerPos.y;
+        float ty=sprite.gameObject.transform.position.z-playerPos.z;
         sprite.distanceToCamera=sqrtf(tx*tx+ty*ty);
     }
     sort(spriteArray.begin(),spriteArray.end(), cmpSprite);
@@ -71,17 +71,17 @@ void T_Render::RenderUpdate(HDC hdc)
         Sprite& sprite=*spriteArray[index];
         if(!sprite.gameObject.isActive||sprite.distanceToCamera>MAX_VISIT_LENGHT) continue;
         //计算是否在渲染屏幕内
-        float cost= sprite.gameObject.transform.position.z/sprite.distanceToCamera;
-        float sint= sprite.gameObject.transform.position.x/sprite.distanceToCamera;
+        float cost= -(sprite.gameObject.transform.position.z-playerPos.z)/sprite.distanceToCamera;
+        float sint= -(sprite.gameObject.transform.position.x-playerPos.x)/sprite.distanceToCamera;
         float thea=acos(cost);
         if(cost>=0&&sint>=0){
             thea+=0;
-        }else if(cost<=0&&sint>=0){
-            thea+=Pi/2;
-        }else if(cost<=0&&sint<=0){
+        }else if(cost<0&&sint>=0){
+            thea=Pi-thea;
+        }else if(cost<0&&sint<0){
             thea+=Pi;
         }else{
-            thea+=Pi*2/3;
+            thea=-thea;
         }
         float rot=playerRot.x;
         rot= fmodf(rot,2*Pi);
@@ -96,9 +96,15 @@ void T_Render::RenderUpdate(HDC hdc)
             int nowWidth=(int)(T_Map::TEXTURE_WIDTH/(lenToSprite));
             int nowHeight=(int)(T_Map::TEXTURE_HEIGHT/(lenToSprite));
             int maxLine=min(nowWidth/2+rastOffset+1,screenWidth);
-
-            for(int screenLine=max(0,rastOffset);screenLine<maxLine;screenLine++){
-
+            int startLine=rastOffset-nowWidth/2;
+            SelectObject(memDC,T_Map::mapWallSprite[sprite.graphIndex].GetBmpHandle());
+            for(int screenLine=max(0,startLine);screenLine<maxLine;screenLine++){
+                if(wallDistance[screenLine]>sprite.distanceToCamera){
+                    float tx=(screenLine-startLine)*1.0/nowWidth;
+                    TransparentBlt(hdc,screenLine,midHeight-nowHeight/2,1,nowHeight,
+                               memDC,tx*T_Map::TEXTURE_WIDTH,0,1,T_Map::TEXTURE_HEIGHT,RGB(0,0,0));
+                    //没时间搞掩码图了，直接就这样吧
+                }
             }
         }
         //
